@@ -4,26 +4,24 @@ metadata:
   name: infrastructure
   namespace: argocd
 spec:
-  goTemplate: true
-  goTemplateOptions: ["missingkey=error"]
   generators:
   - git:
-      repoURL: https://github.com/zhweiliu/infrastructure
+      repoURL: https://github.com/zhweiliu/infrastructure.git
       revision: main
       directories:
       - path: argocd/clusters/infrastructure/*
   template:
     metadata:
-      name: 'infrastructure-{{.path.basename}}'
+      name: 'infrastructure-{{path.basename}}'
     spec:
       project: "default"
       source:
-        repoURL: https://github.com/zhweiliu/infrastructure
+        repoURL: https://github.com/zhweiliu/infrastructure.git
         targetRevision: main
         path: argocd/clusters/infrastructure/{{path.basename}}
       destination:
         server: https://kubernetes.default.svc
-        namespace: '{{.path.basename}}'
+        namespace: '{{path.basename}}'
       syncPolicy:
         automated: 
           prune: true
