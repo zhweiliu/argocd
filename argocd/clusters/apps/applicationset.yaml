@@ -1,0 +1,33 @@
+apiVersion: argoproj.io/v1alpha1
+kind: ApplicationSet
+metadata:
+  name: cluster-addons
+  namespace: argocd
+spec:
+  goTemplate: true
+  goTemplateOptions: ["missingkey=error"]
+  generators:
+  - git:
+      repoURL: https://github.com/zhweiliu/infrastructure
+      revision: main
+      directories:
+      - path: argocd/clusters/apps/*
+  template:
+    metadata:
+      name: 'infrastructure-{{.path.basename}}'
+    spec:
+      project: "default"
+      source:
+        repoURL: https://github.com/zhweiliu/infrastructure
+        targetRevision: main
+        path: argocd/clusters/apps/{{path.basename}}
+      destination:
+        server: https://k3d-apps-server-0:6443
+        namespace: '{{.path.basename}}'
+      syncPolicy:
+        automated: 
+          prune: true
+          allowEmpty: true
+        syncOptions:
+        - CreateNamespace=true
+        - ServerSideApply=true
