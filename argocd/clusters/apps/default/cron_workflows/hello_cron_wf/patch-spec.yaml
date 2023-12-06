@@ -1,0 +1,14 @@
+- op: replace
+  path: /spec/schedule
+  value: "*/3 * * * *"
+- op: replace
+  path: /spec/workflowSpec/templates/0/container/image
+  value: docker/whalesay
+- op: add
+  path: /spec/workflowSpec/templates/0/container/command
+  value:
+    - "cowsay"
+- op: add
+  path: /spec/workflowSpec/templates/0/container/args
+  value:
+    - "hello world"
