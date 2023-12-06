@@ -13,3 +13,6 @@
   path: /spec/workflowSpec/templates/0/container/args
   value:
     - "date; sleep 10"
+- op: add
+  path: /spec/suspend
+  value: true
