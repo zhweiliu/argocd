@@ -3,12 +3,13 @@
   value: "*/3 * * * *"
 - op: replace
   path: /spec/workflowSpec/templates/0/container/image
-  value: docker/whalesay
+  value: alpine:3.6
 - op: add
   path: /spec/workflowSpec/templates/0/container/command
   value:
-    - "cowsay"
+    - sh
+    - -c
 - op: add
   path: /spec/workflowSpec/templates/0/container/args
   value:
-    - "hello world"
+    - "date; sleep 10"
