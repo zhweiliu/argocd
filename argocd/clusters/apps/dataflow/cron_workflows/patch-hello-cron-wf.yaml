@@ -1,9 +1,6 @@
 - op: replace
   path: /spec/schedule
   value: "*/3 * * * *"
-- op: replace
-  path: /spec/workflowSpec/templates/0/container/image
-  value: alpine:3.6
 - op: add
   path: /spec/workflowSpec/templates/0/container/command
   value:
