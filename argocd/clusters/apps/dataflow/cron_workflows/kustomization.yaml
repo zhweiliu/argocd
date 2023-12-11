@@ -10,7 +10,7 @@ resources:
 images:
   - name: image-name
     newName: alpine
-    newTag: "3.5"
+    newTag: "3.6"
 
 patches:
   - target:
