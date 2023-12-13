@@ -3,3 +3,4 @@ kind: Kustomization
 
 resources:
   - ./nfs-server
+  - ./nfs-client-provisioner
