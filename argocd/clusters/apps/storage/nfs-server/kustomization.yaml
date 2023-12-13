@@ -6,5 +6,5 @@ resources:
 
 images:
   - name: image-name
-    newName: k8s.gcr.io/volume-nfs
+    newName: gcr.io/google_containers/volume-nfs
     newTag: "0.8"
