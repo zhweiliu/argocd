@@ -8,3 +8,7 @@ patches:
   - target:
       namespace: argo
     path: patch-namespace.yaml
+  - target:
+      kind: Deployment
+      name: argo-server
+    path: patch-auth-mode.yaml
