@@ -11,4 +11,4 @@ patches:
   - target:
       kind: Deployment
       name: argo-server
-    path: patch-auth-mode.yaml
+    path: patch-argo-server.yaml
