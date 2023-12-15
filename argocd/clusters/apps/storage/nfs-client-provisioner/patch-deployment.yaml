@@ -9,11 +9,11 @@ spec:
         - name: nfs-client-provisioner
           env:
             - name: NFS_SERVER
-              value: nfs-server.storage.svc.cluster.local
+              value: "10.42.5.9"
             - name: NFS_PATH
               value: /exports
       volumes:
         - name: nfs-client-root
           nfs:
-            server: nfs-server.storage.svc.cluster.local
+            server: "10.42.5.9"
             path: /exports
