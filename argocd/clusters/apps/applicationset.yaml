@@ -20,7 +20,7 @@ spec:
         targetRevision: main
         path: argocd/clusters/apps/{{path.basename}}
       destination:
-        server: https://k3d-apps-server-0:6443
+        server: https://kubernetes.default.svc
         namespace: '{{path.basename}}'
       syncPolicy:
         automated: 
