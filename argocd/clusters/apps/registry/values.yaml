@@ -65,7 +65,7 @@ docker-registry:
     #  memory: 128Mi
   persistence:
     accessMode: 'ReadWriteOnce'
-    enabled: false
+    enabled: true
     size: 10Gi
     # storageClass: '-'
 
@@ -76,7 +76,7 @@ docker-registry:
   # tlsSecretName: registry.docker.example.com
   secrets:
     haSharedSecret: ""
-    htpasswd: ""
+    htpasswd: "admin:$2y$05$rblv6uTvSzMG4d1dftlFhu55.AM8Z9UMfx2.K7xw8.QqFhb0tWKCS"
   # Secrets for Azure
   #   azure:
   #     accountName: ""
