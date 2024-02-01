@@ -8,19 +8,6 @@
       - "192.168.0.0/16"
       - "127.0.0.1/32"
     admin/access_management: 1
-    admin/allow_databases/database:
-      - "default"
-      - "invoices"
-      - "sellers"
-    eric/k8s_secret_password: clickhouse/chi-users/ERIC
-    eric/profile: engineer
-    eric/quota: default
-    eric/networks/ip:
-      - "192.168.0.0/16"
-      - "127.0.0.1/32"
-    eric/allow_databases/database:
-      - "invoices"
-      - "sellers"
     invoice_svc/k8s_secret_password: clickhouse/chi-users/INVOICE_SVC
     invoice_svc/profile: microservice
     invoice_svc/quota: default
@@ -30,3 +17,4 @@
     invoice_svc/allow_databases/database:
       - "invoices"
       - "sellers"
+      - "marts"
