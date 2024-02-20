@@ -2,12 +2,12 @@
   path: /spec/schedule
   value: "*/3 * * * *"
 - op: add
-  path: /spec/workflowSpec/templates/0/container/command
+  path: /spec/workflowSpec/templates/1/container/command
   value:
     - sh
     - -c
 - op: add
-  path: /spec/workflowSpec/templates/0/container/args
+  path: /spec/workflowSpec/templates/1/container/args
   value:
     - "date; sleep 10"
 - op: add

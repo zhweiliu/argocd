@@ -1,0 +1,45 @@
+apiVersion: argoproj.io/v1alpha1
+kind: CronWorkflow
+metadata:
+  name: COMPONENT_NAME
+spec:
+  schedule: "* * * * *"
+  concurrencyPolicy: "Forbid"
+  startingDeadlineSeconds: 0
+  workflowSpec:
+    affinity:
+      podAntiAffinity:
+        preferredDuringSchedulingIgnoredDuringExecution:
+          - weight: 1
+            podAffinityTerm:
+              labelSelector:
+                matchExpressions:
+                  - key: app
+                    operator: In
+                    values:
+                    - argo-workflows
+              topologyKey: "kubernetes.io/hostname"
+      nodeAffinity:
+        requiredDuringSchedulingIgnoredDuringExecution:
+          nodeSelectorTerms:
+            - matchExpressions:
+                - key: cloud.google.com/gke-nodepool
+                  operator: In
+                  values:
+                    - cron-workflows
+    entrypoint: dag
+    templates: 
+      - name: dag
+        dag:
+          tasks:
+            - name: COMPONENT_NAME
+              template: COMPONENT_NAME
+              arguments:
+                parameters: []
+      - name: COMPONENT_NAME
+        inputs:
+          parameters: []
+        container: 
+          image: image-name
+          command: []
+          args: []

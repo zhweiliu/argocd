@@ -17,5 +17,3 @@ patches:
       kind: CronWorkflow
       name: hello-cron-wf
     path: patch-hello-cron-wf.yaml
-
-

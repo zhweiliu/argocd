@@ -16,8 +16,11 @@ patches:
         path: /metadata/name
         value: hello-cron-wf
       - op: replace
-        path: /spec/workflowSpec/entrypoint
+        path: /spec/workflowSpec/templates/0/dag/tasks/0/name
         value: hello-cron-wf
       - op: replace
-        path: /spec/workflowSpec/templates/0/name
+        path: /spec/workflowSpec/templates/0/dag/tasks/0/template
+        value: hello-cron-wf
+      - op: replace
+        path: /spec/workflowSpec/templates/1/name
         value: hello-cron-wf
