@@ -11,11 +11,11 @@
 
 - op: replace
   path: /spec/defaults/templates/dataVolumeClaimTemplate
-  value:
+  value: ""
 
 - op: replace
   path: /spec/defaults/templates/logVolumeClaimTemplate
-  value:
+  value: ""
 
 - op: replace
   path: /spec/templates/volumeClaimTemplates
