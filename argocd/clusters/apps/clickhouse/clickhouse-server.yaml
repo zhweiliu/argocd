@@ -8,3 +8,15 @@
       - "192.168.0.0/16"
       - "127.0.0.1/32"
     admin/access_management: 1
+
+- op: replace
+  path: /spec/defaults/templates/dataVolumeClaimTemplate
+  value:
+
+- op: replace
+  path: /spec/defaults/templates/logVolumeClaimTemplate
+  value:
+
+- op: replace
+  path: /spec/templates/volumeClaimTemplates
+  value: []
