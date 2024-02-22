@@ -10,12 +10,10 @@
     admin/access_management: 1
 
 - op: replace
-  path: /spec/defaults/templates/dataVolumeClaimTemplate
-  value: ""
-
-- op: replace
-  path: /spec/defaults/templates/logVolumeClaimTemplate
-  value: ""
+  path: /spec/defaults/templates
+  value: 
+    serviceTemplate: service-template
+    podTemplate: pod-template
 
 - op: replace
   path: /spec/templates/volumeClaimTemplates
