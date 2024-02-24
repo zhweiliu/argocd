@@ -156,8 +156,6 @@ altinity-clickhouse-operator:
         <!-- IMPORTANT -->
         <yandex>
             <max_connections>10240</max_connections>
-            <async_insert>1</async_insert>
-            <wait_for_async_insert>1</wait_for_async_insert>
         </yandex>
     files:
       config.yaml: |-
@@ -601,6 +599,8 @@ altinity-clickhouse-operator:
               <parallel_view_processing>1</parallel_view_processing>
               <do_not_merge_across_partitions_select_final>1</do_not_merge_across_partitions_select_final>
               <load_balancing>nearest_hostname</load_balancing>
+              <async_insert>1</async_insert>
+              <wait_for_async_insert>1</wait_for_async_insert>
             </default>
 
             <engineer>
@@ -611,6 +611,8 @@ altinity-clickhouse-operator:
               <parallel_view_processing>1</parallel_view_processing>
               <do_not_merge_across_partitions_select_final>1</do_not_merge_across_partitions_select_final>
               <load_balancing>nearest_hostname</load_balancing>
+              <async_insert>1</async_insert>
+              <wait_for_async_insert>1</wait_for_async_insert>
             </engineer>
 
             <metabase>
@@ -631,6 +633,8 @@ altinity-clickhouse-operator:
               <parallel_view_processing>1</parallel_view_processing>
               <do_not_merge_across_partitions_select_final>1</do_not_merge_across_partitions_select_final>
               <load_balancing>nearest_hostname</load_balancing>
+              <async_insert>1</async_insert>
+              <wait_for_async_insert>1</wait_for_async_insert>
             </microservice>
 
             <dbt>
@@ -641,6 +645,8 @@ altinity-clickhouse-operator:
               <parallel_view_processing>1</parallel_view_processing>
               <do_not_merge_across_partitions_select_final>1</do_not_merge_across_partitions_select_final>
               <load_balancing>nearest_hostname</load_balancing>
+              <async_insert>1</async_insert>
+              <wait_for_async_insert>1</wait_for_async_insert>
             </dbt>
           </profiles>
         </yandex>
