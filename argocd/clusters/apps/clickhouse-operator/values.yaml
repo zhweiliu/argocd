@@ -156,6 +156,8 @@ altinity-clickhouse-operator:
         <!-- IMPORTANT -->
         <yandex>
             <max_connections>10240</max_connections>
+            <async_insert>1</async_insert>
+            <wait_for_async_insert>1</wait_for_async_insert>
         </yandex>
     files:
       config.yaml: |-
