@@ -1,0 +1,11 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+
+resources:
+  - ./configmap.yaml
+  - ./invoices
+
+images:
+  - name: image-name
+    newName: localhost:12345/dataflow-dbt
+    newTag: latest

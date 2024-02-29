@@ -5,7 +5,7 @@ resources:
   - ../../base
 
 commonLabels:
-  app: hello-cron-wf
+  app: invoices-dataflow-dbt
 
 patches:
   - target:
@@ -14,13 +14,13 @@ patches:
     patch: |-
       - op: replace
         path: /metadata/name
-        value: hello-cron-wf
+        value: invoices-dataflow-dbt
       - op: replace
         path: /spec/workflowSpec/templates/0/dag/tasks/0/name
-        value: hello-cron-wf
+        value: invoices-dataflow-dbt
       - op: replace
         path: /spec/workflowSpec/templates/0/dag/tasks/0/template
-        value: hello-cron-wf
+        value: invoices-dataflow-dbt
       - op: replace
         path: /spec/workflowSpec/templates/1/name
-        value: hello-cron-wf
+        value: invoices-dataflow-dbt

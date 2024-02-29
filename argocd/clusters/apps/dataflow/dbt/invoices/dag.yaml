@@ -1,0 +1,22 @@
+- op: replace
+  path: /spec/schedule
+  value: "0 * * * *"
+
+- op: replace
+  path: /spec/workflowSpec/templates/0/dag/tasks
+  value: 
+    - name: dbt-run-invoices
+      template: dbt-run-invoices
+    
+- op: replace
+  path: /spec/workflowSpec/templates/1
+  value:
+    name: dbt-run-invoices
+    container:
+      image: image-name
+      command: 
+        - dbt
+      args:
+        - run
+        - --select
+        - "+marts.invoices"
