@@ -7,5 +7,5 @@ resources:
 
 images:
   - name: image-name
-    newName: localhost:12345/dataflow-dbt
+    newName: k3d-registry.localhost:12345/dataflow-dbt
     newTag: latest
