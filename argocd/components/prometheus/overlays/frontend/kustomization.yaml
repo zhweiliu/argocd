@@ -14,25 +14,20 @@ patches:
     patch: |-
       - op: replace
         path: /metadata/name
-        value: frontend
-      - op: replace
-        path: /spec/template/spec/serviceAccountName
         value: prometheus
       - op: replace
         path: /spec/template/spec/affinity/podAntiAffinity/preferredDuringSchedulingIgnoredDuringExecution/0/podAffinityTerm/labelSelector/matchExpressions/0/values/0
-        value: frontend
+        value: prometheus
       - op: replace
         path: /spec/template/spec/topologySpreadConstraints/0/labelSelector/matchLabels/app
-        value: frontend
+        value: prometheus
       - op: replace
         path: /spec/template/spec/containers/0/name
-        value: frontend
+        value: prometheus
   - target:
       kind: Service
       name: COMPONENT_NAME
     patch: |-
       - op: replace
         path: /metadata/name
-        value: frontend
-
-
+        value: prometheus
