@@ -10,11 +10,15 @@ spec:
       serviceTemplate: service-template
       podTemplate: pod-template
   configuration:
+    zookeeper:
+      nodes:
+        - host: clickhouse-keeper
+          port: 2181
     clusters:
       - name: standard
         layout:
           shardsCount: 1
-          replicasCount: 1
+          replicasCount: 2
   templates:
     podTemplates:
       - name: pod-template
