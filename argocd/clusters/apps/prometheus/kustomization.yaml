@@ -1,0 +1,20 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+resources:
+  - ../../../components/prometheus/overlays/frontend
+images:
+  - name: image-name
+    newName: gke.gcr.io/prometheus-engine/frontend
+    newTag: v0.7.2-gke.0
+replicas:
+  - name: frontend
+    count: 1
+patches:
+  - target:
+      kind: Deployment
+      name: frontend
+    patch: |-
+      - op: replace
+        path: /spec/template/spec/containers/0/args
+        value:
+          - "--web.listen-address=:9090"

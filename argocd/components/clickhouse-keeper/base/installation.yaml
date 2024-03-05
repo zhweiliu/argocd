@@ -319,7 +319,7 @@ spec:
         app: clickhouse-keeper
         what: node
       annotations:
-        prometheus.io/port: '7000'
+        prometheus.io/port: '9090'
         prometheus.io/scrape: 'true'
     spec:
       affinity:
