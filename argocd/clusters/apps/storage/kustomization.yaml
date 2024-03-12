@@ -3,3 +3,8 @@ kind: Kustomization
 
 resources:
   - ../../../components/nfs-server/overlays/common
+
+images:
+  - name: image-name
+    newName: gcr.io/google_containers/volume-nfs
+    newTag: "0.8"
