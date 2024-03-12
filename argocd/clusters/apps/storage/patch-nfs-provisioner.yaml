@@ -10,7 +10,7 @@
     - name: PROVISIONER_NAME
       value: mynfs
     - name: NFS_SERVER
-      value: "nfs-server.storage.svc.cluster.local"
+      value: 10.43.18.190:2049
     - name: NFS_PATH
       value: /exports
 
@@ -19,5 +19,5 @@
   value:
     - name: nfs-client-root
       nfs:
-        server: "nfs-server.storage.svc.cluster.local"
+        server: 10.43.18.190:2049
         path: /exports
