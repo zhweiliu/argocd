@@ -30,14 +30,24 @@ spec:
           # affinity removed to allow use in single node test environment
           affinity:
             podAntiAffinity:
-              requiredDuringSchedulingIgnoredDuringExecution:
-                - labelSelector:
+              preferredDuringSchedulingIgnoredDuringExecution:
+              - weight: 1
+                podAffinityTerm:
+                  labelSelector:
                     matchExpressions:
-                      - key: "app"
+                    - key: app
+                      operator: In
+                      values:
+                      - clickhouse-keeper
+                  topologyKey: "kubernetes.io/hostname"
+            nodeAffinity:
+              requiredDuringSchedulingIgnoredDuringExecution:
+                nodeSelectorTerms:
+                  - matchExpressions:
+                      - key: cloud.google.com/gke-nodepool
                         operator: In
                         values:
                           - clickhouse-keeper
-                  topologyKey: "kubernetes.io/hostname"
           containers:
             - name: clickhouse-keeper
               imagePullPolicy: IfNotPresent
