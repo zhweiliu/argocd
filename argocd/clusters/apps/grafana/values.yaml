@@ -581,7 +581,8 @@ grafana:
 
   ## Pass the plugins you want installed as a list.
   ##
-  plugins: []
+  plugins: 
+    - vertamedia-clickhouse-datasource
     # - digrich-bubblechart-panel
     # - grafana-clock-panel
     ## You can also use other plugin download URL, as long as they are valid zip files,
