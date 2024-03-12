@@ -3,14 +3,3 @@ kind: Kustomization
 
 resources:
   - ../../../components/nfs-server/overlays/common
-  - ../../../components/nfs-provisioner/overlays/common
-
-patches:
-  - target:
-      kind: Deployment
-      name: nfs-provisioner
-    path: patch-nfs-provisioner.yaml
-  - target:
-      kind: ClusterRoleBinding
-      name: run-nfs-client-provisioner
-    path: patch-rbac.yaml
