@@ -50,9 +50,6 @@ spec:
             - name: clickhouse
               image: image-name
               imagePullPolicy: IfNotPresent
-              volumeMounts:
-                - name: data-storage
-                  mountPath: /var/lib/clickhouse
               resources:
                 limit:
                   cpu: 500m
@@ -60,10 +57,23 @@ spec:
                 requests:
                   cpu: 500m
                   memory: 1Gi
-              volumes:
-                - name: data-storage
-                  persistentVolumeClaim:
-                    claimName: nfs-server
+    volumeClaimTemplates:
+      - name: data-volume-template
+        spec:
+          storageClassName: COMPONENT_NAME
+          accessModes:
+            - ReadWriteOnce
+          resources:
+            requests:
+              storage: 1Gi
+      - name: log-volume-template
+        spec:
+          storageClassName: COMPONENT_NAME
+          accessModes:
+            - ReadWriteOnce
+          resources:
+            requests:
+              storage: 100Mi
     serviceTemplates:
       - name: service-template
         generateName: "chendpoint-{chi}"
