@@ -10,3 +10,7 @@ patches:
       kind: Deployment
       name: nfs-provisioner
     path: patch-nfs-provisioner.yaml
+  - target:
+      kind: ClusterRoleBinding
+      name: run-nfs-client-provisioner
+    path: patch-rbac.yaml
