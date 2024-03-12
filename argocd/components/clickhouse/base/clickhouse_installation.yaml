@@ -58,10 +58,10 @@ spec:
                 requests:
                   cpu: 500m
                   memory: 1Gi
-              volumes:
-                - name: data-storage
-                  persistentVolumeClaim:
-                    claimName: nfs-server
+          volumes:
+            - name: data-storage
+              persistentVolumeClaim:
+                claimName: nfs-server
     serviceTemplates:
       - name: service-template
         generateName: "chendpoint-{chi}"
