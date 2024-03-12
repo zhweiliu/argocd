@@ -3,8 +3,10 @@ kind: Kustomization
 
 resources:
   - ../../../components/nfs-server/overlays/common
+  - ../../../components/nfs-provisioner/overlays/common
 
-images:
-  - name: image-name
-    newName: gcr.io/google_containers/volume-nfs
-    newTag: "0.8"
+patches:
+  - target:
+      kind: Deployment
+      name: nfs-provisioner
+    path: patch-nfs-provisioner.yaml

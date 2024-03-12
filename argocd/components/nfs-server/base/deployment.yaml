@@ -34,7 +34,7 @@ spec:
               app: nfs-server
       containers:
       - name: COMPONENT_NAME
-        image: image-name
+        image: "gcr.io/google_containers/volume-nfs:0.8"
         imagePullPolicy: Always
         ports:
           - name: nfs
