@@ -5,6 +5,8 @@ metadata:
 spec:
   defaults:
     templates:
+      dataVolumeClaimTemplate: data-volume-template
+      logVolumeClaimTemplate: log-volume-template
       serviceTemplate: service-template
       podTemplate: pod-template
   configuration:
