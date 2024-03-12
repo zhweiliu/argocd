@@ -1,0 +1,17 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: COMPONENT_NAME
+spec:
+  replicas: 1
+  strategy:
+    type: Recreate
+  template:
+    spec:
+      serviceAccountName: nfs-client-provisioner
+      containers:
+        - name: COMPONENT_NAME
+          image: quay.io/external_storage/nfs-client-provisioner:latest
+          volumeMounts: []
+          env: []
+      volumes: []

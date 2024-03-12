@@ -1,0 +1,23 @@
+- op: add
+  path: /spec/template/spec/containers/0/volumeMounts
+  value:
+    - name: nfs-client-root
+      mountPath: /persistentvolumes
+
+- op: add
+  path: /spec/template/spec/containers/0/env
+  value: 
+    - name: PROVISIONER_NAME
+      value: mynfs
+    - name: NFS_SERVER
+      value: 10.43.75.137
+    - name: NFS_PATH
+      value: /exports
+
+- op: add
+  path: /spec/template/spec/volumes
+  value:
+    - name: nfs-client-root
+      nfs:
+        server: 10.43.75.137
+        path: /exports
