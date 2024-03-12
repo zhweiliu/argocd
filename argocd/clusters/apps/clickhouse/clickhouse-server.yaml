@@ -16,3 +16,7 @@
       - "10.0.0.0/8"
       - "192.168.0.0/16"
       - "127.0.0.1/32"
+
+- op: replace
+  path: /spec/configuration/clusters/0/layout/shardsCount
+  value: 2

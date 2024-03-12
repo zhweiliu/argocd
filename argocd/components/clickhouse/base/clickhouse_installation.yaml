@@ -6,7 +6,6 @@ spec:
   defaults:
     templates:
       dataVolumeClaimTemplate: data-volume-template
-      logVolumeClaimTemplate: log-volume-template
       serviceTemplate: service-template
       podTemplate: pod-template
   configuration:
@@ -66,14 +65,6 @@ spec:
           resources:
             requests:
               storage: 1Gi
-      - name: log-volume-template
-        spec:
-          storageClassName: COMPONENT_NAME
-          accessModes:
-            - ReadWriteOnce
-          resources:
-            requests:
-              storage: 100Mi
     serviceTemplates:
       - name: service-template
         generateName: "chendpoint-{chi}"
