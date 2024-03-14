@@ -7,8 +7,8 @@ spec:
     templates:
       dataVolumeClaimTemplate: data-volume-template
       serviceTemplate: service-template
-      replicaServiceTemplate: replica-service-template
-      clusterServiceTemplate: cluster-service-template
+      # replicaServiceTemplate: replica-service-template
+      # clusterServiceTemplate: cluster-service-template
       podTemplate: pod-template
   configuration:
     clusters:
