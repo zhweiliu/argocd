@@ -5,6 +5,9 @@
     admin/profile: admin
     admin/quota: default
     admin/access_management: 1
+    operator/k8s_secret_password: clickhouse/chi-users/OPERATOR
+    operator/profile: default
+    operator/quota: default
     grafana/k8s_secret_password: clickhouse/chi-users/GRAFANA
     grafana/profile: default
     grafana/quota: default

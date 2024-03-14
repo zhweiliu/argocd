@@ -37,8 +37,8 @@ altinity-clickhouse-operator:
 
   secret:
     create: true
-    username: admin
-    password: admin
+    username: operator
+    password: operator
 
   nodeSelector: {}
   tolerations: []
