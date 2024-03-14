@@ -7,10 +7,13 @@ spec:
     templates:
       dataVolumeClaimTemplate: data-volume-template
       serviceTemplate: service-template
+      replicaServiceTemplate: replica-service-template
       podTemplate: pod-template
   configuration:
     clusters:
       - name: standard
+        templates:
+          clusterServiceTemplate: cluster-service-template
         layout:
           shardsCount: 1
           replicasCount: 1
