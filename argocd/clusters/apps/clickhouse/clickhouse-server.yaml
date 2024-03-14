@@ -10,18 +10,10 @@
     admin/k8s_secret_password: clickhouse/chi-users/ADMIN
     admin/profile: admin
     admin/quota: default
-    admin/networks/ip:
-      - "10.0.0.0/8"
-      - "192.168.0.0/16"
-      - "127.0.0.1/32"
     admin/access_management: 1
     grafana/k8s_secret_password: clickhouse/chi-users/GRAFANA
     grafana/profile: default
     grafana/quota: default
-    grafana/networks/ip:
-      - "10.0.0.0/8"
-      - "192.168.0.0/16"
-      - "127.0.0.1/32"
 
 - op: replace
   path: /spec/configuration/clusters/0/layout/shardsCount
