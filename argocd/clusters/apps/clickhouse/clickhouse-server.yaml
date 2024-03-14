@@ -1,9 +1,3 @@
-# - op: add
-#   path: /spec/configuration/zookeeper
-#   value:
-#     nodes:
-#       - host: chk.clickhouse
- 
 - op: add
   path: /spec/configuration/users
   value:
@@ -27,7 +21,7 @@
 
 - op: replace
   path: /spec/configuration/clusters/0/layout/shardsCount
-  value: 2
+  value: 1
 
 - op: replace
   path: /spec/configuration/clusters/0/layout/replicasCount

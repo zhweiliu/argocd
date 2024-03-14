@@ -4,7 +4,6 @@ kind: Kustomization
 resources:
   - secrets.yaml
   - ../../../components/clickhouse/overlays/common
-  # - ../../../components/clickhouse-keeper/overlays/common
 
 images:
   - name: image-name
