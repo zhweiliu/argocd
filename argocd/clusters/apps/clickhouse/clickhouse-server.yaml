@@ -1,4 +1,10 @@
 - op: add
+  path: /spec/configuration/zookeeper
+  value:
+    nodes:
+      - host: chk.clickhouse
+ 
+- op: add
   path: /spec/configuration/users
   value:
     admin/k8s_secret_password: clickhouse/chi-users/ADMIN
