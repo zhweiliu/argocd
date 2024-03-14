@@ -6,6 +6,8 @@ spec:
   defaults:
     templates:
       dataVolumeClaimTemplate: data-volume-template
+      serviceTemplate: service-template
+      replicaServiceTemplate: replica-service-template
       podTemplate: pod-template
   configuration:
     clusters:
@@ -67,6 +69,16 @@ spec:
             requests:
               storage: 1Gi
     serviceTemplates:
+      - name: service-template
+        generateName: "service-{chi}"
+        spec:
+          ports:
+            - name: http
+              port: 8123
+            - name: tcp
+              port: 9000
+          type: ClusterIP
+          externalTrafficPolicy: Local
       - name: cluster-service-template
         generateName: "service-{cluster}"
         spec:
@@ -77,3 +89,13 @@ spec:
             port: 9000
           type: ClusterIP
           ClusterIP: None
+      - name: replica-service-template
+        generateName: "service-{chi}-{shard}-{replica}"
+        spec:
+          ports:
+            - name: http
+              port: 8123
+            - name: tcp
+              port: 9000
+          type: ClusterIP
+          clusterIP: None
