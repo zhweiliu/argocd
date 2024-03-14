@@ -9,6 +9,9 @@ spec:
       serviceTemplate: service-template
       podTemplate: pod-template
   configuration:
+    zookeeper:
+      nodes:
+        - chk-1-nodes.clickhouse
     clusters:
       - name: standard
         layout:
