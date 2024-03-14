@@ -6,11 +6,12 @@ spec:
   defaults:
     templates:
       dataVolumeClaimTemplate: data-volume-template
-      serviceTemplate: cluster-service-template
       podTemplate: pod-template
   configuration:
     clusters:
       - name: standard
+        templates:
+          clusterServiceTemplate: cluster-service-template
         layout:
           shardsCount: 1
           replicasCount: 1
@@ -67,7 +68,7 @@ spec:
               storage: 1Gi
     serviceTemplates:
       - name: cluster-service-template
-        generateName: "chendpoint-{cluster}"
+        generateName: "service-{cluster}"
         spec:
           ports:
           - name: http
