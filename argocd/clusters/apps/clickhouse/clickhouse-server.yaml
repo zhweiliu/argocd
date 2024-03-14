@@ -29,4 +29,4 @@
 
 - op: replace
   path: /spec/configuration/clusters/0/layout/replicasCount
-  value: 3
+  value: 2
