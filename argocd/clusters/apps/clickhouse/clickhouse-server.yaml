@@ -14,8 +14,8 @@
 
 - op: replace
   path: /spec/configuration/clusters/0/layout/shardsCount
-  value: 1
+  value: 2
 
 - op: replace
   path: /spec/configuration/clusters/0/layout/replicasCount
-  value: 1
+  value: 2
