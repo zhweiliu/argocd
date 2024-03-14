@@ -1,8 +1,8 @@
-- op: add
-  path: /spec/configuration/zookeeper
-  value:
-    nodes:
-      - host: chk.clickhouse
+# - op: add
+#   path: /spec/configuration/zookeeper
+#   value:
+#     nodes:
+#       - host: chk.clickhouse
  
 - op: add
   path: /spec/configuration/users
