@@ -6,6 +6,6 @@ data:
   DBT_CLICKHOUSE_INGESTION_DATABASE: "ingestion"
   DBT_CLICKHOUSE_INVOICES_DATABASE: "invoices"
   DBT_CLICKHOUSE_SELLERS_DATABASE: "sellers"
-  DBT_CLICKHOUSE_HOST: "chendpoint-chi.clickhouse.svc.cluster.local"
+  DBT_CLICKHOUSE_HOST: "service-standard.clickhouse.svc.cluster.local"
   DBT_CLICKHOUSE_HTTP_PORT: "8123"
   DBT_CLICKHOUSE_USERNAME: "admin"
