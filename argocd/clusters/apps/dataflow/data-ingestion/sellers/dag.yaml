@@ -1,0 +1,48 @@
+- op: replace
+  path: /spec/schedule
+  value: "0 8 * * *"
+
+- op: replace
+  path: /spec/workflowSpec/templates/0/dag/tasks
+  value: 
+    - name: data-ingestion-seller-info
+      template: data-ingestion-seller-info
+    - name: data-ingestion-seller-closure
+      template: data-ingestion-seller-closure
+      depends: "data-ingestion-seller-info && data-ingestion-seller-info.Succeeded"
+    - name: data-ingestion-seller-non-operational
+      template: data-ingestion-seller-non-operational
+      depends: "data-ingestion-seller-closure && data-ingestion-seller-closure.Succeeded"
+    
+- op: replace
+  path: /spec/workflowSpec/templates/1
+  value:
+    name: data-ingestion-seller-info
+    container:
+      image: image-name
+      command: 
+        - python3
+      args:
+        - applications/raw_seller_info.py
+
+- op: add
+  path: /spec/workflowSpec/templates/2
+  value:
+    name: data-ingestion-seller-closure
+    container:
+      image: image-name
+      command: 
+        - python3
+      args:
+        - applications/raw_seller_closure.py
+
+- op: add
+  path: /spec/workflowSpec/templates/3
+  value:
+    name: data-ingestion-seller-non-operational
+    container:
+      image: image-name
+      command: 
+        - python3
+      args:
+        - applications/raw_seller_non_operational.py

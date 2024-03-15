@@ -1,0 +1,26 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+
+resources:
+  - ../../base
+
+commonLabels:
+  app: sellers-dataflow-dbt
+
+patches:
+  - target:
+      kind: CronWorkflow
+      name: COMPONENT_NAME
+    patch: |-
+      - op: replace
+        path: /metadata/name
+        value: sellers-dataflow-dbt
+      - op: replace
+        path: /spec/workflowSpec/templates/0/dag/tasks/0/name
+        value: sellers-dataflow-dbt
+      - op: replace
+        path: /spec/workflowSpec/templates/0/dag/tasks/0/template
+        value: sellers-dataflow-dbt
+      - op: replace
+        path: /spec/workflowSpec/templates/1/name
+        value: sellers-dataflow-dbt
