@@ -5,7 +5,7 @@ metadata:
 spec:
   configuration:
     clusters:
-      - name: "simple-1"
+      - name: standard
         layout:
           replicasCount: 1
     settings:
@@ -52,11 +52,11 @@ spec:
               whenUnsatisfiable: DoNotSchedule
               labelSelector:
                 matchLabels:
-                  app: clickhouse-keeper
+                  app: chk
           containers:
-            - name: clickhouse-keeper
+            - name: chk
               imagePullPolicy: IfNotPresent
-              image: "clickhouse/clickhouse-keeper:head-alpine"
+              image: "clickhouse/clickhouse-keeper:24.2"
               resources:
                 requests:
                   memory: "256M"
