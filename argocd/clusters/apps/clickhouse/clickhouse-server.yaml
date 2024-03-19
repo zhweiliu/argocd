@@ -39,5 +39,5 @@
   path: /spec/configuration/zookeeper
   value:
     nodes:
-      - host: chk
+      - host: chk-0
         port: 2181
