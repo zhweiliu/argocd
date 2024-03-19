@@ -157,6 +157,12 @@ altinity-clickhouse-operator:
         <yandex>
             <max_connections>10240</max_connections>
         </yandex>
+      01-clickhouse-07-distributed-ddl.xml: |-
+        <yandex>
+            <distributed_ddl>
+                <path>/etc/clickhouse-server/new_task_queue/ddl</path>
+            </distributed_ddl>
+        </yandex>
     files:
       config.yaml: |-
         # IMPORTANT
