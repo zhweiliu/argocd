@@ -765,6 +765,10 @@ grafana:
   ## ref: http://docs.grafana.org/installation/configuration/
   ##
   grafana.ini:
+    auth.anonymous:
+      enabled: true
+      org_name: Main Org.
+      org_role: Admin
     paths:
       data: /var/lib/grafana/
       logs: /var/log/grafana
