@@ -6,3 +6,25 @@ resources:
 
 commonLabels:
   app: chk
+
+patches:
+  - target:
+      kind: "ClickHouseKeeperInstallation"
+      name: COMPONENT_NAME
+    patch: |-
+      - op: replace
+        path: /metadata/name
+        value: chk
+      - op: replace
+        path: /spec/templates/podTemplates/0/spec/topologySpreadConstraints/0/labelSelector/matchLabels/app
+        value: chk
+      - op: replace
+        path: /spec/templates/podTemplates/0/spec/containers/0/name
+        value: chk
+  - target:
+      kind: Service
+      name: COMPONENT_NAME
+    patch: |-
+      - op: replace
+        path: /metadata/name
+        value: chk

@@ -1,0 +1,14 @@
+- op: replace
+  path: /spec/configuration/clusters/0/layout/replicasCount
+  value: 1
+
+- op: replace
+  path: /spec/templates/podTemplates/0/spec/containers/0/resources
+  value:
+    requests:
+      memory: "256M"
+      cpu: "0.5"
+    limits:
+      memory: "256M"
+      cpu: "0.5"
+

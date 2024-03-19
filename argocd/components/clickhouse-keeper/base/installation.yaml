@@ -1,7 +1,7 @@
 apiVersion: "clickhouse-keeper.altinity.com/v1"
 kind: "ClickHouseKeeperInstallation"
 metadata:
-  name: chk
+  name: COMPONENT_NAME
 spec:
   configuration:
     clusters:
@@ -52,11 +52,11 @@ spec:
               whenUnsatisfiable: DoNotSchedule
               labelSelector:
                 matchLabels:
-                  app: chk
+                  app: COMPONENT_NAME
           containers:
-            - name: chk
+            - name: COMPONENT_NAME
               imagePullPolicy: IfNotPresent
-              image: "clickhouse/clickhouse-keeper:24.2"
+              image: keeper-image-name
               resources:
                 requests:
                   memory: "256M"

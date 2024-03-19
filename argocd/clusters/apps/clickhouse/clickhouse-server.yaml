@@ -34,3 +34,10 @@
 - op: replace
   path: /spec/configuration/clusters/0/layout/replicasCount
   value: 1
+
+- op: add
+  path: /spec/configuration/zookeeper
+  value:
+    nodes:
+      - host: chk.clickhouse
+        port: 2181
