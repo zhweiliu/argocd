@@ -39,5 +39,5 @@
   path: /spec/configuration/zookeeper
   value:
     nodes:
-      - host: chk.clickhouse
+      - host: chk
         port: 2181
