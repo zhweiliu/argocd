@@ -90,7 +90,7 @@ spec:
           type: ClusterIP
           ClusterIP: None
       - name: replica-service-template
-        generateName: "{chi-{chi}-{shard}-{replica}"
+        generateName: "{chi}-{chi}-{cluster}-{shard}-{replica}"
         spec:
           ports:
             - name: http
