@@ -4,22 +4,22 @@ kind: Kustomization
 resources:
   - secrets.yaml
   - ../../../components/clickhouse/overlays/common
-  - ../../../components/clickhouse-keeper/overlays/common
+  # - ../../../components/clickhouse-keeper/overlays/common
 
 images:
   - name: image-name
     newName: clickhouse/clickhouse-server
     newTag: "23.9"
-  - name: keeper-image-name
-    newName: clickhouse/clickhouse-keeper
-    newTag: "24.2"
+  # - name: keeper-image-name
+  #   newName: clickhouse/clickhouse-keeper
+  #   newTag: "24.2"
 
 patches:
   - target:
       kind: "ClickHouseInstallation"
       name: chi
     path: clickhouse-server.yaml
-  - target:
-      kind: "ClickHouseKeeperInstallation"
-      name: chk
-    path: clickhouse-keeper.yaml
+  # - target:
+  #     kind: "ClickHouseKeeperInstallation"
+  #     name: chk
+  #   path: clickhouse-keeper.yaml
