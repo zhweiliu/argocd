@@ -39,5 +39,5 @@
   path: /spec/configuration/zookeeper
   value:
     nodes:
-      - host: chk.clickhouse.svc.cluster.local
+      - host: chk.clickhouse-keeper.svc.cluster.local
         port: 2181

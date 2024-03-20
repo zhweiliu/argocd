@@ -1,0 +1,16 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+
+resources:
+  - ../../../components/clickhouse-keeper/overlays/common
+
+images:
+  - name: image-name
+    newName: clickhouse/clickhouse-keeper
+    newTag: "24.2"
+
+patches:
+  - target:
+      kind: "ClickHouseKeeperInstallation"
+      name: chk
+    path: clickhouse-keeper.yaml

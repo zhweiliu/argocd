@@ -56,7 +56,7 @@ spec:
           containers:
             - name: COMPONENT_NAME
               imagePullPolicy: IfNotPresent
-              image: keeper-image-name
+              image: image-name
               resources:
                 requests:
                   memory: "256M"
