@@ -190,7 +190,7 @@ altinity-clickhouse-operator:
           # IMPORTANT
           # Regexp is applicable.
           #namespaces: ["dev", "test"]
-          namespaces: ["clickhouse-operator","clickhouse"]
+          namespaces: ["clickhouse-operator","clickhouse","clickhouse-keeper"]
 
         clickhouse:
           configuration:
