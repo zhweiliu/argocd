@@ -23,6 +23,42 @@ patches:
         path: /metadata/name
         value: chk
   - target:
+      kind: ConfigMap
+      name: COMPONENT_NAME_SETTINGS
+    patch: |-
+      - op: replace
+        path: /metadata/name
+        value: chk-settings
+  - target:
+      kind: StatefulSet
+      name: COMPONENT_NAME_SETTINGS
+    patch: |-
+      - op: replace
+        path: /spec/template/spec/volumes/0/configMap/name
+        value: chk-settings
+  - target:
+      kind: ConfigMap
+      name: COMPONENT_NAME_SCRIPTS
+    patch: |-
+      - op: replace
+        path: /metadata/name
+        value: chk-scripts
+      - op: replace
+        path: /data/env.sh
+        value: |
+          #!/usr/bin/env bash
+          export DOMAIN=`hostname -d`
+          export CLIENT_HOST=chk
+          export CLIENT_PORT=2181
+          export RAFT_PORT=9444
+  - target:
+      kind: StatefulSet
+      name: COMPONENT_NAME_SCRIPTS
+    patch: |-
+      - op: replace
+        path: /spec/template/spec/volumes/1/configMap/name
+        value: chk-settings
+  - target:
       kind: StatefulSet
       name: COMPONENT_NAME
     patch: |-
@@ -30,11 +66,22 @@ patches:
         path: /metadata/name
         value: chk
       - op: replace
-        path: /spec/serviceName
-        value: chk
-      - op: replace
         path: /spec/template/spec/topologySpreadConstraints/0/labelSelector/matchLabels/app
         value: chk
       - op: replace
         path: /spec/template/spec/containers/0/name
-        value: chk
+        value: chk      
+  - target:
+      kind: Service
+      name: COMPONENT_NAME_HEADLESS
+    patch: |-
+      - op: replace
+        path: /metadata/name
+        value: chk-headless
+  - target:
+      kind: StatefulSet
+      name: COMPONENT_NAME_HEADLESS
+    patch: |-
+      - op: replace
+        path: /spec/serviceName
+        value: chk-headless
