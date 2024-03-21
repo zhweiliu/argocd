@@ -5,4 +5,36 @@ resources:
   - ../../base
 
 commonLabels:
-  app: clickhouse-keeper
+  app: chk
+
+patches:
+  - target:
+      kind: Service
+      name: COMPONENT_NAME
+    patch: |-
+      - op: replace
+        path: /metadata/name
+        value: chk
+  - target:
+      kind: PodDisruptionBudget
+      name: COMPONENT_NAME
+    patch: |-
+      - op: replace
+        path: /metadata/name
+        value: chk
+  - target:
+      kind: StatefulSet
+      name: COMPONENT_NAME
+    patch: |-
+      - op: replace
+        path: /metadata/name
+        value: chk
+      - op: replace
+        path: /spec/serviceName
+        value: chk
+      - op: replace
+        path: /spec/template/spec/topologySpreadConstraints/0/labelSelector/matchLabels/app
+        value: chk
+      - op: replace
+        path: /spec/template/spec/containers/0/name
+        value: chk

@@ -12,5 +12,5 @@ images:
 patches:
   - target:
       kind: StatefulSet
-      name: clickhouse-keeper
+      name: chk
     path: clickhouse-keeper.yaml
