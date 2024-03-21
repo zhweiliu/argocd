@@ -1,22 +1,9 @@
-# ---
-# # Setup Service to provide access to ClickHouse keeper for clients
-# apiVersion: v1
-# kind: Service
-# metadata:
-#   # DNS would be like clickhouse-keeper.namespace.svc
-#   name: COMPONENT_NAME
-# spec:
-#   ports:
-#     - port: 2181
-#       name: client
-#     - port: 7000
-#       name: prometheus
 ---
-# Setup Headless Service for StatefulSet
+# Setup Service to provide access to ClickHouse keeper for clients
 apiVersion: v1
 kind: Service
 metadata:
-  # DNS would be like clickhouse-keeper-0.clickhouse-keepers.namespace.svc
+  # DNS would be like clickhouse-keeper.namespace.svc
   name: COMPONENT_NAME
 spec:
   ports:
@@ -24,6 +11,15 @@ spec:
       name: client
     - port: 7000
       name: prometheus
+---
+# Setup Headless Service for StatefulSet
+apiVersion: v1
+kind: Service
+metadata:
+  # DNS would be like clickhouse-keeper-0.clickhouse-keepers.namespace.svc
+  name: COMPONENT_NAME_HEADLESS
+spec:
+  ports:
     - port: 9444
       name: raft
   clusterIP: None
@@ -40,7 +36,8 @@ spec:
 apiVersion: v1
 kind: ConfigMap
 metadata:
-  name: clickhouse-keeper-settings
+  # name: clickhouse-keeper-settings
+  name: COMPONENT_NAME_SETTINGS
 data:
   keeper_config.xml: |
     <clickhouse>
@@ -74,7 +71,8 @@ data:
 apiVersion: v1
 kind: ConfigMap
 metadata:
-  name: clickhouse-keeper-scripts
+  # name: clickhouse-keeper-scripts
+  name: COMPONENT_NAME_SCRIPTS
 data:
   env.sh: |
     #!/usr/bin/env bash
@@ -294,7 +292,7 @@ metadata:
   # nodes would be named as clickhouse-keeper-0, clickhouse-keeper-1, clickhouse-keeper-2
   name: COMPONENT_NAME
 spec:
-  serviceName: COMPONENT_NAME
+  serviceName: COMPONENT_NAME_HEADLESS
   replicas: 3
   podManagementPolicy: OrderedReady
   template:
@@ -331,13 +329,13 @@ spec:
       volumes:
         - name: clickhouse-keeper-settings
           configMap:
-            name: clickhouse-keeper-settings
+            name: COMPONENT_NAME_SETTINGS
             items:
               - key: keeper_config.xml
                 path: keeper_config.xml
         - name: clickhouse-keeper-scripts
           configMap:
-            name: clickhouse-keeper-scripts
+            name: COMPONENT_NAME_SCRIPTS
             defaultMode: 0755
       containers:
         - name: COMPONENT_NAME

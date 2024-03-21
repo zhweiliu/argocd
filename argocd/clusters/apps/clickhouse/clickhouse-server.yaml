@@ -36,7 +36,7 @@
   value: 1
 
 - op: add
-  path: /spec/configuration/zookeeper
+  path: /spec/configuration/clusters/0/zookeeper
   value:
     nodes:
       - host: chk.clickhouse-keeper.svc.cluster.local
