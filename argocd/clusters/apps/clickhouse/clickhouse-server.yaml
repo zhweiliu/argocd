@@ -92,6 +92,7 @@
         resources:
           requests:
             storage: 100Mi
+        reclaimPolicy: Retain
     - name: chi-standard-1-0
       spec:
         storageClassName: chi-data
@@ -101,6 +102,7 @@
         resources:
           requests:
             storage: 100Mi
+        reclaimPolicy: Retain
         
 - op: replace
   path: /spec/configuration/clusters/0/layout
