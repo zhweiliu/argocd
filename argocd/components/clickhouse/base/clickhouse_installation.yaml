@@ -2,17 +2,14 @@ apiVersion: "clickhouse.altinity.com/v1"
 kind: "ClickHouseInstallation"
 metadata:
   name: COMPONENT_NAME
-spec:
-  defaults:
-    templates:
-      dataVolumeClaimTemplate: data-volume-template
-      serviceTemplate: service-template
-      podTemplate: pod-template
+spec: 
   configuration:
     clusters:
       - name: standard
         templates:
           clusterServiceTemplate: cluster-service-template
+          dataVolumeClaimTemplate: data-volume-template
+          podTemplate: pod-template
         layout:
           shardsCount: 1
           replicasCount: 1
@@ -67,6 +64,7 @@ spec:
           resources:
             requests:
               storage: 1Gi
+          volumeName: "{cluster}-shard-{shard}-replica-{replica}-data"
     serviceTemplates:
       - name: service-template
         generateName: "service-{chi}"

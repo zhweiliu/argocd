@@ -1,47 +1,83 @@
 altinity-clickhouse-operator:
   operator:
     image:
+      # operator.image.repository -- image repository
       repository: altinity/clickhouse-operator
+      # operator.image.tag -- image tag (chart's appVersion value will be used if not set)
       tag: ""
+      # operator.image.pullPolicy -- image pull policy
       pullPolicy: IfNotPresent
-    resources:
-      requests:
-        cpu: 100m
-        memory: 128Mi
-    env: []
+    containerSecurityContext: {}
+    # operator.resources -- custom resource configuration, look `kubectl explain pod.spec.containers.resources` for details
+    resources: 
+     limits:
+       cpu: 100m
+       memory: 128Mi
+     requests:
+       cpu: 100m
+       memory: 128Mi
 
+    # operator.env -- additional environment variables for the clickhouse-operator container in deployment
+    # possible format value [{"name": "SAMPLE", "value": "text"}]
+    env: []
   metrics:
     enabled: true
     image:
+      # metrics.image.repository -- image repository
       repository: altinity/metrics-exporter
+      # metrics.image.tag -- image tag (chart's appVersion value will be used if not set)
       tag: ""
+      # metrics.image.pullPolicy -- image pull policy
       pullPolicy: IfNotPresent
+    containerSecurityContext: {}
+    # metrics.resources -- custom resource configuration
     resources:
-      requests:
-        cpu: 100m
-        memory: 128Mi
+     limits:
+       cpu: 100m
+       memory: 128Mi
+     requests:
+       cpu: 100m
+       memory: 128Mi
+
+    # metrics.env -- additional environment variables for the deployment of metrics-exporter containers
+    # possible format value [{"name": "SAMPLE", "value": "text"}]
     env: []
-
+  # imagePullSecrets -- image pull secret for private images in clickhouse-operator pod
+  #  possible value format [{"name":"your-secret-name"}]
+  #  look `kubectl explain pod.spec.imagePullSecrets` for details
   imagePullSecrets: []
-
+  # podAnnotations -- annotations to add to the clickhouse-operator pod, look `kubectl explain pod.spec.annotations` for details
   podAnnotations:
     prometheus.io/port: '8888'
     prometheus.io/scrape: 'true'
-
+    clickhouse-operator-metrics/port: '9999'
+    clickhouse-operator-metrics/scrape: 'true'
+  # nameOverride -- override name of the chart
   nameOverride: "chop"
+  # fullnameOverride -- full name of the chart.
   fullnameOverride: "chop"
   serviceAccount:
+    # serviceAccount.create -- specifies whether a service account should be created
     create: true
+    # serviceAccount.annotations -- annotations to add to the service account
     annotations: {}
+    # serviceAccount.name -- the name of the service account to use; if not set and create is true, a name is generated using the fullname template
     name:
-
-  secret:
+  rbac:
+    # rbac.create -- specifies whether cluster roles and cluster role bindings should be created
     create: true
+  secret:
+    # secret.create -- create a secret with operator credentials
+    create: true
+    # secret.username -- operator credentials username
     username: operator
+    # secret.password -- operator credentials password
     password: operator
-
+  # nodeSelector -- node for scheduler pod assignment, look `kubectl explain pod.spec.nodeSelector` for details
   nodeSelector: {}
+  # tolerations -- tolerations for scheduler pod assignment, look `kubectl explain pod.spec.tolerations` for details
   tolerations: []
+  # affinity -- affinity for scheduler pod assignment, look `kubectl explain pod.spec.affinity` for details
   affinity:
     podAntiAffinity:
       preferredDuringSchedulingIgnoredDuringExecution:
@@ -62,10 +98,15 @@ altinity-clickhouse-operator:
                 operator: In
                 values:
                   - clickhouse-operator
+  # podSecurityContext - operator deployment SecurityContext, look `kubectl explain pod.spec.securityContext` for details
+  podSecurityContext: {}
   serviceMonitor:
+    # serviceMonitor.enabled -- ServiceMonitor Custom resource is created for a (prometheus-operator)[https://github.com/prometheus-operator/prometheus-operator]
     enabled: false
+    # serviceMonitor.additionalLabels -- additional labels for service monitor
     additionalLabels: {}
-
+  # configs -- clickhouse-operator configs
+  # @default -- check the values.yaml file for the config content, auto-generated from latest operator release
   configs:
     confdFiles: null
     configdFiles:
@@ -91,7 +132,7 @@ altinity-clickhouse-operator:
         <!-- IMPORTANT -->
         <yandex>
             <logger>
-                <!-- Possible levels: https://github.com/pocoproject/poco/blob/develop/Foundation/include/Poco/Logger.h#L105 -->
+                <!-- Possible levels: https://github.com/pocoproject/poco/blob/devel/Foundation/include/Poco/Logger.h#L439 -->
                 <level>debug</level>
                 <log>/var/log/clickhouse-server/clickhouse-server.log</log>
                 <errorlog>/var/log/clickhouse-server/clickhouse-server.err.log</errorlog>
@@ -147,24 +188,8 @@ altinity-clickhouse-operator:
                 <flush_interval_milliseconds>7500</flush_interval_milliseconds>
             </trace_log>
         </yandex>
-      01-clickhouse-06-connections.xml: |-
-        <!-- IMPORTANT -->
-        <!-- This file is auto-generated -->
-        <!-- Do not edit this file - all changes would be lost -->
-        <!-- Edit appropriate template in the following folder: -->
-        <!-- deploy/builder/templates-config -->
-        <!-- IMPORTANT -->
-        <yandex>
-            <max_connections>10240</max_connections>
-        </yandex>
-      01-clickhouse-07-distributed-ddl.xml: |-
-        <yandex>
-            <distributed_ddl>
-                <path>/etc/clickhouse-server/new_task_queue/ddl</path>
-            </distributed_ddl>
-        </yandex>
     files:
-      config.yaml: |-
+      config.yaml:
         # IMPORTANT
         # This file is auto-generated
         # Do not edit this file - all changes would be lost
@@ -178,10 +203,11 @@ altinity-clickhouse-operator:
         #   CH_PASSWORD_PLAIN=
         #   CH_CREDENTIALS_SECRET_NAMESPACE=
         #   CH_CREDENTIALS_SECRET_NAME=clickhouse-operator
+        #   VERBOSITY=1
 
         ################################################
         ##
-        ## Watch Section
+        ## Watch section
         ##
         ################################################
         watch:
@@ -191,15 +217,17 @@ altinity-clickhouse-operator:
           # Regexp is applicable.
           #namespaces: ["dev", "test"]
           namespaces: ["clickhouse-operator","clickhouse","clickhouse-keeper"]
-
         clickhouse:
           configuration:
             ################################################
             ##
-            ## Configuration Files Section
+            ## Configuration files section
             ##
             ################################################
             file:
+              # Each 'path' can be either absolute or relative.
+              # In case path is absolute - it is used as is
+              # In case path is relative - it is relative to the folder where configuration file you are reading right now is located.
               path:
                 # Path to the folder where ClickHouse configuration files common for all instances within a CHI are located.
                 common: config.d
@@ -210,7 +238,7 @@ altinity-clickhouse-operator:
                 user: users.d
             ################################################
             ##
-            ## Configuration Users Section
+            ## Configuration users section
             ##
             ################################################
             user:
@@ -240,21 +268,25 @@ altinity-clickhouse-operator:
                 password: "default"
             ################################################
             ##
-            ## Configuration Network Section
+            ## Configuration network section
             ##
             ################################################
             network:
               # Default host_regexp to limit network connectivity from outside
               hostRegexpTemplate: "(chi-{chi}-[^.]+\\d+-\\d+|clickhouse\\-{chi})\\.{namespace}\\.svc\\.cluster\\.local$"
-
           ################################################
           ##
-          ## Configuration Restart Policy Section
+          ## Configuration restart policy section
           ## Configuration restart policy describes what configuration changes require ClickHouse restart
           ##
           ################################################
           configurationRestartPolicy:
             rules:
+              # IMPORTANT!
+              # Special version of "*" - default version - has to satisfy all ClickHouse versions.
+              # Default version will also be used in case ClickHouse version is unknown.
+              # ClickHouse version may be unknown due to host being down - for example, because of incorrect "settings" section.
+              # ClickHouse is not willing to start in case incorrect/unknown settings are provided in config file.
               - version: "*"
                 rules:
                   - settings/*: "yes"
@@ -266,18 +298,15 @@ altinity-clickhouse-operator:
                   - settings/max_concurrent_queries: "no"
                   - settings/models_config: "no"
                   - settings/user_defined_executable_functions_config: "no"
-
                   - zookeeper/*: "yes"
-
+                  - files/*.xml: "yes"
                   - files/config.d/*.xml: "yes"
                   - files/config.d/*dict*.xml: "no"
-
                   - profiles/default/background_*_pool_size: "yes"
                   - profiles/default/max_*_for_server: "yes"
               - version: "21.*"
                 rules:
                   - settings/logger: "yes"
-
           #################################################
           ##
           ## Access to ClickHouse instances
@@ -299,7 +328,6 @@ altinity-clickhouse-operator:
             username: ""
             password: ""
             rootCA: ""
-
             # Location of the k8s Secret with username and password to be used by the operator to connect to ClickHouse instances.
             # Can be used instead of explicitly specified username and password available in sections:
             #   - clickhouse.access.username
@@ -311,23 +339,32 @@ altinity-clickhouse-operator:
               # Empty `namespace` means that k8s secret would be looked in the same namespace where operator's pod is running.
               namespace: ""
               # Empty `name` means no k8s Secret would be looked for
-              name: "{{ include "altinity-clickhouse-operator.fullname" . }}"
+              name: '{{ include "altinity-clickhouse-operator.fullname" . }}'
             # Port where to connect to ClickHouse instances to
             port: 8123
-
             # Timeouts used to limit connection and queries from the operator to ClickHouse instances
             # Specified in seconds.
             timeouts:
-              connect: 2
-              query: 5
-
+              # Timout to setup connection from the operator to ClickHouse instances. In seconds.
+              connect: 1
+              # Timout to perform SQL query from the operator to ClickHouse instances. In seconds.
+              query: 4
+          #################################################
+          ##
+          ## Metrics collection
+          ##
+          ################################################
           metrics:
+            # Timeouts used to limit connection and queries from the metrics exporter to ClickHouse instances
+            # Specified in seconds.
             timeouts:
+              # Timeout used to limit metrics collection request. In seconds.
+              # Upon reaching this timeout metrics collection is aborted and no more metrics are collected in this cycle.
+              # All collected metrics are returned.
               collect: 9
-
         ################################################
         ##
-        ## Templates Section
+        ## Template(s) management section
         ##
         ################################################
         template:
@@ -337,27 +374,35 @@ altinity-clickhouse-operator:
             #   - ReadOnStart. Accept CHIT updates on the operators start only.
             #   - ApplyOnNextReconcile. Accept CHIT updates at all time. Apply news CHITs on next regular reconcile of the CHI
             policy: ApplyOnNextReconcile
-
             # Path to the folder where ClickHouseInstallation templates .yaml manifests are located.
             # Templates are added to the list of all templates and used when CHI is reconciled.
             # Templates are applied in sorted alpha-numeric order.
             path: templates.d
-
         ################################################
         ##
-        ## Reconcile Section
+        ## Reconcile section
         ##
         ################################################
         reconcile:
+          # Reconcile runtime settings
           runtime:
             # Max number of concurrent CHI reconciles in progress
             reconcileCHIsThreadsNumber: 10
-            # Max number of concurrent shard reconciles in progress
-            reconcileShardsThreadsNumber: 1
-            # The maximum percentage of cluster shards that may be reconciled in parallel
-            reconcileShardsMaxConcurrencyPercent: 50
+            # The operator reconciles shards concurrently in each CHI with the following limitations:
+            #   1. Number of shards being reconciled (and thus having hosts down) in each CHI concurrently
+            #      can not be greater than 'reconcileShardsThreadsNumber'.
+            #   2. Percentage of shards being reconciled (and thus having hosts down) in each CHI concurrently
+            #      can not be greater than 'reconcileShardsMaxConcurrencyPercent'.
+            #   3. The first shard is always reconciled alone. Concurrency starts from the second shard and onward.
+            # Thus limiting number of shards being reconciled (and thus having hosts down) in each CHI by both number and percentage
 
+            # Max number of concurrent shard reconciles within one CHI in progress
+            reconcileShardsThreadsNumber: 5
+            # Max percentage of concurrent shard reconciles within one CHI in progress
+            reconcileShardsMaxConcurrencyPercent: 50
+          # Reconcile StatefulSet scenario
           statefulSet:
+            # Create StatefulSet scenario
             create:
               # What to do in case created StatefulSet is not in 'Ready' after `reconcile.statefulSet.update.timeout` seconds
               # Possible options:
@@ -367,7 +412,7 @@ altinity-clickhouse-operator:
               # 2. delete - delete newly created problematic StatefulSet and follow 'abort' path afterwards.
               # 3. ignore - ignore an error, pretend nothing happened, continue reconcile and move on to the next StatefulSet.
               onFailure: ignore
-
+            # Update StatefulSet scenario
             update:
               # How many seconds to wait for created/updated StatefulSet to be 'Ready'
               timeout: 300
@@ -383,20 +428,20 @@ altinity-clickhouse-operator:
               #    Follow 'abort' path afterwards.
               # 3. ignore - ignore an error, pretend nothing happened, continue reconcile and move on to the next StatefulSet.
               onFailure: abort
-
+          # Reconcile Host scenario
           host:
-            # Whether reconciler should wait for a host:
-            # - to be excluded from a cluster
-            # OR
-            # - to be included into a cluster
-            # respectfully before proceeding to the host reconciliation.
+            # Whether the operator during reconcile procedure should wait for a ClickHouse host:
+            #   - to be excluded from a ClickHouse cluster
+            #   - to complete all running queries
+            #   - to be included into a ClickHouse cluster
+            # respectfully before moving forward
             wait:
               exclude: true
+              queries: true
               include: false
-
         ################################################
         ##
-        ## Annotations management
+        ## Annotations management section
         ##
         ################################################
         annotation:
@@ -408,10 +453,9 @@ altinity-clickhouse-operator:
           include: []
           # Exclude annotations from the following list:
           exclude: []
-
         ################################################
         ##
-        ## Labels management
+        ## Labels management section
         ##
         ################################################
         label:
@@ -437,18 +481,16 @@ altinity-clickhouse-operator:
           #  LabelClusterScopeCycleIndex
           #  LabelClusterScopeCycleOffset
           appendScope: "no"
-
         ################################################
         ##
-        ## StatefulSet management
+        ## StatefulSet management section
         ##
         ################################################
         statefulSet:
           revisionHistoryLimit: 0
-
         ################################################
         ##
-        ## Pod management
+        ## Pod management section
         ##
         ################################################
         pod:
@@ -457,10 +499,9 @@ altinity-clickhouse-operator:
           # SIGTERM and SIGKILL during Pod termination process.
           # Increase this number is case of slow shutdown.
           terminationGracePeriod: 30
-
         ################################################
         ##
-        ## Log parameters
+        ## Log parameters section
         ##
         ################################################
         logger:
@@ -503,7 +544,7 @@ altinity-clickhouse-operator:
                     "containers" : [
                       {
                         "name": "clickhouse",
-                        "image": "clickhouse/clickhouse-server:22.3",
+                        "image": "clickhouse/clickhouse-server:23.8",
                         "ports": [
                           {
                             "name": "http",
@@ -587,7 +628,7 @@ altinity-clickhouse-operator:
         <!-- IMPORTANT -->
         <yandex>
           <profiles>
-            <admin>
+            <default>
               <os_thread_priority>2</os_thread_priority>
               <log_queries>1</log_queries>
               <connect_timeout_with_failover_ms>1000</connect_timeout_with_failover_ms>
@@ -595,79 +636,46 @@ altinity-clickhouse-operator:
               <parallel_view_processing>1</parallel_view_processing>
               <do_not_merge_across_partitions_select_final>1</do_not_merge_across_partitions_select_final>
               <load_balancing>nearest_hostname</load_balancing>
-              <async_insert>1</async_insert>
-              <wait_for_async_insert>1</wait_for_async_insert>
-              <async_insert_deduplicate>1</async_insert_deduplicate>
-            </admin>
-
-            <default>
-              <os_thread_priority>4</os_thread_priority>
-              <log_queries>1</log_queries>
-              <connect_timeout_with_failover_ms>1000</connect_timeout_with_failover_ms>
-              <distributed_aggregation_memory_efficient>1</distributed_aggregation_memory_efficient>
-              <parallel_view_processing>1</parallel_view_processing>
-              <do_not_merge_across_partitions_select_final>1</do_not_merge_across_partitions_select_final>
-              <load_balancing>nearest_hostname</load_balancing>
-              <async_insert>1</async_insert>
-              <wait_for_async_insert>1</wait_for_async_insert>
-              <async_insert_deduplicate>1</async_insert_deduplicate>
+              <prefer_localhost_replica>0</prefer_localhost_replica>
+              <!-- materialize_ttl_recalculate_only>1</materialize_ttl_recalculate_only> 21.10 and above -->
             </default>
-
-            <engineer>
-              <os_thread_priority>3</os_thread_priority>
-              <log_queries>1</log_queries>
-              <connect_timeout_with_failover_ms>1000</connect_timeout_with_failover_ms>
-              <distributed_aggregation_memory_efficient>1</distributed_aggregation_memory_efficient>
-              <parallel_view_processing>1</parallel_view_processing>
-              <do_not_merge_across_partitions_select_final>1</do_not_merge_across_partitions_select_final>
-              <load_balancing>nearest_hostname</load_balancing>
-              <async_insert>1</async_insert>
-              <wait_for_async_insert>1</wait_for_async_insert>
-              <async_insert_deduplicate>1</async_insert_deduplicate>
-            </engineer>
-
-            <metabase>
-              <os_thread_priority>10</os_thread_priority>
-              <log_queries>1</log_queries>
-              <connect_timeout_with_failover_ms>1000</connect_timeout_with_failover_ms>
-              <distributed_aggregation_memory_efficient>1</distributed_aggregation_memory_efficient>
-              <parallel_view_processing>1</parallel_view_processing>
-              <do_not_merge_across_partitions_select_final>1</do_not_merge_across_partitions_select_final>
-              <load_balancing>nearest_hostname</load_balancing>
-            </metabase>
-
-            <microservice>
-              <os_thread_priority>9</os_thread_priority>
-              <log_queries>1</log_queries>
-              <connect_timeout_with_failover_ms>1000</connect_timeout_with_failover_ms>
-              <distributed_aggregation_memory_efficient>1</distributed_aggregation_memory_efficient>
-              <parallel_view_processing>1</parallel_view_processing>
-              <do_not_merge_across_partitions_select_final>1</do_not_merge_across_partitions_select_final>
-              <load_balancing>nearest_hostname</load_balancing>
-              <async_insert>1</async_insert>
-              <wait_for_async_insert>1</wait_for_async_insert>
-              <async_insert_deduplicate>1</async_insert_deduplicate>
-            </microservice>
-
-            <dbt>
-              <os_thread_priority>9</os_thread_priority>
-              <log_queries>1</log_queries>
-              <connect_timeout_with_failover_ms>1000</connect_timeout_with_failover_ms>
-              <distributed_aggregation_memory_efficient>1</distributed_aggregation_memory_efficient>
-              <parallel_view_processing>1</parallel_view_processing>
-              <do_not_merge_across_partitions_select_final>1</do_not_merge_across_partitions_select_final>
-              <load_balancing>nearest_hostname</load_balancing>
-              <async_insert>1</async_insert>
-              <wait_for_async_insert>1</wait_for_async_insert>
-              <async_insert_deduplicate>1</async_insert_deduplicate>
-            </dbt>
           </profiles>
         </yandex>
-
+  # additionalResources -- list of additional resources to create (are processed via `tpl` function), useful for create ClickHouse clusters together with clickhouse-operator, look `kubectl explain chi` for details
   additionalResources: []
+  #  - |
+  #    apiVersion: v1
+  #    kind: ConfigMap
+  #    metadata:
+  #      name: {{ include "altinity-clickhouse-operator.fullname" . }}-cm
+  #      namespace: {{ .Release.Namespace }}
+  #  - |
+  #     apiVersion: v1
+  #     kind: Secret
+  #     metadata:
+  #       name: {{ include "altinity-clickhouse-operator.fullname" . }}-s
+  #       namespace: {{ .Release.Namespace }}
+  #     stringData:
+  #       mykey: my-value
+  #  - |
+  #     apiVersion: clickhouse.altinity.com/v1
+  #     kind: ClickHouseInstallation
+  #     metadata:
+  #       name: {{ include "altinity-clickhouse-operator.fullname" . }}-chi
+  #       namespace: {{ .Release.Namespace }}
+  #     spec:
+  #       configuration:
+  #         clusters:
+  #         - name: default
+  #           layout:
+  #             shardsCount: 1
   dashboards:
+    # dashboards.enabled -- provision grafana dashboards as secrets (can be synced by grafana dashboards sidecar https://github.com/grafana/helm-charts/blob/grafana-6.33.1/charts/grafana/values.yaml#L679 )
     enabled: false
+    # dashboards.additionalLabels -- labels to add to a secret with dashboards
     additionalLabels:
       grafana_dashboard: ""
+    # dashboards.annotations -- annotations to add to a secret with dashboards
     annotations: {}
     grafana_folder: clickhouse
+

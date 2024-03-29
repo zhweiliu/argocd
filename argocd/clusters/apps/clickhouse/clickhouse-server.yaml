@@ -27,8 +27,46 @@
      - 172.0.0.0/8
      - 10.0.0.0/8
 
+- op: add
+  path: /spec/configuration/profiles
+  value:
+    admin/os_thread_priority: 2
+    admin/log_queries: 1
+    admin/async_insert: 1
+    admin/wait_for_async_insert: 1
+    admin/async_insert_deduplicate: 1
+    default/os_thread_priority: 4
+    default/log_queries: 1
+    default/async_insert: 1
+    default/wait_for_async_insert: 1
+    default/async_insert_deduplicate: 1
+    engineer/os_thread_priority: 1
+    engineer/log_queries: 1
+    engineer/async_insert: 1
+    engineer/wait_for_async_insert: 1
+    engineer/async_insert_deduplicate: 1
+    metabase/os_thread_priority: 10
+    metabase/log_queries: 1
+    microservice/os_thread_priority: 2
+    microservice/log_queries: 1
+    microservice/async_insert: 1
+    microservice/wait_for_async_insert: 1
+    microservice/async_insert_deduplicate: 1
+    dbt/os_thread_priority: 2
+    dbt/log_queries: 1
+    dbt/async_insert: 1
+    dbt/wait_for_async_insert: 1
+    dbt/async_insert_deduplicate: 1
+
+- op: add
+  path: /spec/configuration/settings
+  value:
+    max_connections: 10240
+    distributed_ddl/path: /etc/clickhouse-server/new_task_queue/ddl
+    profile/dbt/distributed_product_mode: allow
+
 - op: replace
-  path: /spec/configuration/clusters/0/layout/shardsCount
+  path: /spec/configuration/clusters/0/layout/templates
   value: 2
 
 - op: replace
