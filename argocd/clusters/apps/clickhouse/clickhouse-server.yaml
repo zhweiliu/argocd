@@ -74,6 +74,7 @@
   value:
     max_connections: 10240
     distributed_ddl/path: /etc/clickhouse-server/new_task_queue/ddl
+    profile/admin/distributed_product_mode: global
     profile/dbt/distributed_product_mode: global
 
 - op: replace
