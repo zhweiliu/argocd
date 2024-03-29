@@ -19,6 +19,7 @@ spec:
   templates:
     podTemplates:
       - name: pod-template
+        generateName: "{chi}-{cluster}-shard-{shard}-replica-{replica}"
         spec:
           topologySpreadConstraints:
           - maxSkew: 1
