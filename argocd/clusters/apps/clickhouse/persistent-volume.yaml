@@ -5,6 +5,7 @@ metadata:
  name: chi-standard-shard-0-replica-0
 spec:
   storageClassName: chi-data
+  volumeMode: Filesystem
   accessModes:
       - ReadWriteOnce
   capacity:
@@ -16,6 +17,7 @@ metadata:
  name: chi-standard-shard-1-replica-0
 spec:
   storageClassName: chi-data
+  volumeMode: Filesystem
   accessModes:
       - ReadWriteOnce
   capacity:
