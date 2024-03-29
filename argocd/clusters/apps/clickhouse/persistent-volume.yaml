@@ -10,6 +10,7 @@ spec:
       - ReadWriteOnce
   capacity:
     storage: 1Mi
+  persistentVolumeReclaimPolicy: Recycle
 ---
 apiVersion: v1
 kind: PersistentVolume
@@ -22,3 +23,4 @@ spec:
       - ReadWriteOnce
   capacity:
     storage: 1Mi
+  persistentVolumeReclaimPolicy: Recycle
