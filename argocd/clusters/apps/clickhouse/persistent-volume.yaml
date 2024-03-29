@@ -4,8 +4,9 @@ metadata:
  name: chi-standard-shard-0-replica-0
 spec:
   storageClassName: chi-data
-  accessModes:
-      - ReadWriteOnce
   capacity:
-    storage: 1Mi
-
+    storage: 100Mi
+  accessModes:
+    - ReadWriteOnce
+  persistentVolumeReclaimPolicy: Retain
+  volumeMode: Filesystem
