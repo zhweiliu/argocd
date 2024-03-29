@@ -3,6 +3,9 @@ kind: "ClickHouseInstallation"
 metadata:
   name: COMPONENT_NAME
 spec: 
+  defaults:
+    templates:
+      serviceTemplate: service-template
   configuration:
     clusters:
       - name: standard
