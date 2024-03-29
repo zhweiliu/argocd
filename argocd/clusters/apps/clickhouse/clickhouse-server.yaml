@@ -74,9 +74,11 @@
   value:
     - name: chi-standard-shard-0-replica-0
       spec:
+        storageClassName: chi-data
         volumeName: chi-standard-shard-0-replica-0
     - name: chi-standard-shard-1-replica-0
       spec:
+        storageClassName: chi-data
         volumeName: chi-standard-shard-1-replica-0
 
 - op: replace
