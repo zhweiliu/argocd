@@ -7,8 +7,8 @@
   value:
     requests:
       memory: "256M"
-      cpu: "0.5"
+      cpu: "500m"
     limits:
       memory: "256M"
-      cpu: "0.5"
+      cpu: "500m"
 

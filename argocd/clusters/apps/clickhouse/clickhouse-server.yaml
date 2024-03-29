@@ -66,12 +66,31 @@
     profile/dbt/distributed_product_mode: allow
 
 - op: replace
-  path: /spec/configuration/clusters/0/layout/shardsCount
-  value: 2
+  path: /spec/configuration/clusters/0/templates/dataVolumeClaimTemplate
+  value: 
+
+- op: add
+  path: /spec/templates/volumeClaimTemplates
+  value:
+    - name: chi-standard-shard-0-replica-0
+      spec:
+        volumeName: chi-standard-shard-0-replica-0
+    - name: chi-standard-shard-1-replica-0
+      spec:
+        volumeName: chi-standard-shard-1-replica-0
 
 - op: replace
-  path: /spec/configuration/clusters/0/layout/replicasCount
-  value: 1
+  path: /spec/configuration/clusters/0/layout
+  value:
+    shards:
+      - name: shard-0
+        replicasCount: 1
+        templates:
+          dataVolumeClaimTemplate: chi-standard-shard-0-replica-0
+      - name: shard-1
+        replicasCount: 1
+        templates:
+          dataVolumeClaimTemplate: chi-standard-shard-1-replica-0
 
 - op: add
   path: /spec/configuration/clusters/0/zookeeper
