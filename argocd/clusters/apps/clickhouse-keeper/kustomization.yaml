@@ -2,7 +2,10 @@ apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
 
 resources:
-  - ../../../components/clickhouse-keeper/overlays/common
+  - ./install.yaml
+
+commonLabels:
+  app: chk
 
 images:
   - name: image-name

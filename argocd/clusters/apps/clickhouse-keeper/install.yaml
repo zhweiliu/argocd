@@ -4,7 +4,7 @@ apiVersion: v1
 kind: Service
 metadata:
   # DNS would be like clickhouse-keeper.namespace.svc
-  name: COMPONENT_NAME
+  name: chk
 spec:
   ports:
     - port: 2181
@@ -17,7 +17,7 @@ apiVersion: v1
 kind: Service
 metadata:
   # DNS would be like clickhouse-keeper-0.clickhouse-keepers.namespace.svc
-  name: COMPONENT_NAME_HEADLESS
+  name: chk-headless
 spec:
   ports:
     - port: 9444
@@ -28,7 +28,7 @@ spec:
 apiVersion: policy/v1
 kind: PodDisruptionBudget
 metadata:
-  name: COMPONENT_NAME
+  name: chk
 spec:
   maxUnavailable: 1
 ---
@@ -37,7 +37,7 @@ apiVersion: v1
 kind: ConfigMap
 metadata:
   # name: clickhouse-keeper-settings
-  name: COMPONENT_NAME_SETTINGS
+  name: chk-settings
 data:
   keeper_config.xml: |
     <clickhouse>
@@ -72,12 +72,12 @@ apiVersion: v1
 kind: ConfigMap
 metadata:
   # name: clickhouse-keeper-scripts
-  name: COMPONENT_NAME_SCRIPTS
+  name: chk-scripts
 data:
   env.sh: |
     #!/usr/bin/env bash
     export DOMAIN=`hostname -d`
-    export CLIENT_HOST=clickhouse-keeper
+    export CLIENT_HOST=chk
     export CLIENT_PORT=2181
     export RAFT_PORT=9444
   keeperFunctions.sh: |
@@ -290,9 +290,9 @@ apiVersion: apps/v1
 kind: StatefulSet
 metadata:
   # nodes would be named as clickhouse-keeper-0, clickhouse-keeper-1, clickhouse-keeper-2
-  name: COMPONENT_NAME
+  name: chk
 spec:
-  serviceName: COMPONENT_NAME_HEADLESS
+  serviceName: chk-headless
   replicas: 3
   podManagementPolicy: OrderedReady
   template:
@@ -325,20 +325,20 @@ spec:
           whenUnsatisfiable: DoNotSchedule
           labelSelector:
             matchLabels:
-              app: COMPONENT_NAME
+              app: chk
       volumes:
         - name: clickhouse-keeper-settings
           configMap:
-            name: COMPONENT_NAME_SETTINGS
+            name: chk-settings
             items:
               - key: keeper_config.xml
                 path: keeper_config.xml
         - name: clickhouse-keeper-scripts
           configMap:
-            name: COMPONENT_NAME_SCRIPTS
+            name: chk-scripts
             defaultMode: 0755
       containers:
-        - name: COMPONENT_NAME
+        - name: chk
           imagePullPolicy: IfNotPresent
           image: image-name
           resources:
