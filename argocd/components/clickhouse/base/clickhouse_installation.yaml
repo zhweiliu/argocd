@@ -64,6 +64,7 @@ spec:
           resources:
             requests:
               storage: 1Gi
+          generateName: "{chi}-{cluster}-shard-{shard}-replica-{replica}-data-"
     serviceTemplates:
       - name: service-template
         generateName: "service-{chi}"
