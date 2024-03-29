@@ -75,9 +75,9 @@
     - name: chi-standard-shard-0-replica-0
       spec:
         volumeName: chi-standard-shard-0-replica-0
-    # - name: chi-standard-shard-1-replica-0
-    #   spec:
-    #     volumeName: chi-standard-shard-1-replica-0
+    - name: chi-standard-shard-1-replica-0
+      spec:
+        volumeName: chi-standard-shard-1-replica-0
 
 - op: replace
   path: /spec/configuration/clusters/0/layout
@@ -87,10 +87,10 @@
         replicasCount: 1
         templates:
           dataVolumeClaimTemplate: chi-standard-shard-0-replica-0
-      # - name: shard-1
-      #   replicasCount: 1
-      #   templates:
-      #     dataVolumeClaimTemplate: chi-standard-shard-1-replica-0
+      - name: shard-1
+        replicasCount: 1
+        templates:
+          dataVolumeClaimTemplate: chi-standard-shard-1-replica-0
 
 - op: add
   path: /spec/configuration/clusters/0/zookeeper

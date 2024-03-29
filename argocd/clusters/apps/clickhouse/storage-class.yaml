@@ -1,8 +1,0 @@
-apiVersion: storage.k8s.io/v1
-kind: StorageClass
-metadata:
-  name: chi-data
-provisioner: rancher.io/local-path
-reclaimPolicy: Retain # default value is Delete
-allowVolumeExpansion: true
-volumeBindingMode: WaitForFirstConsumer
