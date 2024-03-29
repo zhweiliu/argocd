@@ -4,6 +4,7 @@ kind: PersistentVolume
 metadata:
  name: chi-standard-shard-0-replica-0
 spec:
+  storageClassName: local-path
   capacity:
     storage: 10Gi
   accessModes:
@@ -14,6 +15,7 @@ kind: PersistentVolume
 metadata:
  name: chi-standard-shard-1-replica-0
 spec:
+  storageClassName: local-path
   capacity:
     storage: 10Gi
   accessModes:
