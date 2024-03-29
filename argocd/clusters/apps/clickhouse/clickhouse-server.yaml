@@ -74,7 +74,7 @@
   value:
     max_connections: 10240
     distributed_ddl/path: /etc/clickhouse-server/new_task_queue/ddl
-    profile/dbt/distributed_product_mode: global
+    profile/dbt/distributed_product_mode: allow
 
 - op: replace
   path: /spec/configuration/clusters/0/templates/dataVolumeClaimTemplate
@@ -105,8 +105,15 @@
 - op: replace
   path: /spec/configuration/clusters/0/layout
   value:
-    shardsCount: 2
-    replicasCount: 1
+    shards:
+      - name: shard-0
+        replicasCount: 1
+        templates:
+          dataVolumeClaimTemplate: chi-standard-0-0
+      - name: shard-1
+        replicasCount: 1
+        templates:
+          dataVolumeClaimTemplate: chi-standard-1-0
 
 - op: replace
   path: /spec/templates/podTemplates/0/spec/containers/0/resources
