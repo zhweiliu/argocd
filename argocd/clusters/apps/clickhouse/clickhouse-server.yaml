@@ -86,7 +86,6 @@
     - name: chi-standard-0-0
       spec:
         storageClassName: chi-data
-        volumeName: chi-standard-shard-0-replica-0
         accessModes:
           - ReadWriteOnce
         resources:
@@ -96,7 +95,6 @@
     - name: chi-standard-1-0
       spec:
         storageClassName: chi-data
-        volumeName: chi-standard-shard-1-replica-0
         accessModes:
           - ReadWriteOnce
         resources:
