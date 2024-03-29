@@ -70,9 +70,9 @@ altinity-clickhouse-operator:
     # secret.create -- create a secret with operator credentials
     create: true
     # secret.username -- operator credentials username
-    username: operator
+    username: admin
     # secret.password -- operator credentials password
-    password: operator
+    password: admin
   # nodeSelector -- node for scheduler pod assignment, look `kubectl explain pod.spec.nodeSelector` for details
   nodeSelector: {}
   # tolerations -- tolerations for scheduler pod assignment, look `kubectl explain pod.spec.tolerations` for details
