@@ -80,7 +80,7 @@
           - ReadWriteOnce
         resources:
           requests:
-            storage: 5Gi
+            storage: 100Mi
     - name: chi-standard-shard-1-replica-0
       spec:
         storageClassName: chi-data
@@ -89,7 +89,7 @@
           - ReadWriteOnce
         resources:
           requests:
-            storage: 5Gi
+            storage: 100Mi
 
 - op: replace
   path: /spec/configuration/clusters/0/layout

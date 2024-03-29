@@ -6,7 +6,7 @@ metadata:
 spec:
   storageClassName: chi-data
   capacity:
-    storage: 1Mi
+    storage: 1Gi
   accessModes:
     - ReadWriteOnce
   hostPath:
@@ -19,7 +19,7 @@ metadata:
 spec:
   storageClassName: chi-data
   capacity:
-    storage: 1Mi
+    storage: 1Gi
   accessModes:
     - ReadWriteOnce
   hostPath:
