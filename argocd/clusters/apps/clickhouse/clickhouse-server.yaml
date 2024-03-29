@@ -3,6 +3,13 @@
   value: standard-cluster
 
 - op: add
+  path: /spec/configuration/clusters/0/zookeeper
+  value:
+    nodes:
+      - host: chk.clickhouse-keeper.svc.cluster.local
+        port: 2181
+
+- op: add
   path: /spec/configuration/users
   value:
     admin/k8s_secret_password: clickhouse/chi-users/ADMIN
@@ -108,9 +115,12 @@
         templates:
           dataVolumeClaimTemplate: chi-standard-shard-1-replica-0
 
-- op: add
-  path: /spec/configuration/clusters/0/zookeeper
+- op: replace
+  path: /spec/templates/podTemplates/0/spec/containers/0/resources
   value:
-    nodes:
-      - host: chk.clickhouse-keeper.svc.cluster.local
-        port: 2181
+    limit:
+      cpu: 500m
+      memory: 1.5G
+    requests:
+      cpu: 500m
+      memory: 1.5G
