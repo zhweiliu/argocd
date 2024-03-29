@@ -67,7 +67,7 @@
 
 - op: replace
   path: /spec/configuration/clusters/0/templates/dataVolumeClaimTemplate
-  value: 
+  value: ""
 
 - op: add
   path: /spec/templates/volumeClaimTemplates
