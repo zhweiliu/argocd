@@ -7,9 +7,8 @@ spec:
   storageClassName: chi-data
   accessModes:
       - ReadWriteOnce
-  resources:
-      requests:
-        storage: 1Mi
+  capacity:
+    storage: 1Mi
 ---
 apiVersion: v1
 kind: PersistentVolume
@@ -19,6 +18,5 @@ spec:
   storageClassName: chi-data
   accessModes:
       - ReadWriteOnce
-  resources:
-      requests:
-        storage: 1Mi
+  capacity:
+    storage: 1Mi
