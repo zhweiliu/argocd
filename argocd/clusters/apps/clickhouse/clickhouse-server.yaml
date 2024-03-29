@@ -46,6 +46,7 @@
     admin/async_insert: 1
     admin/wait_for_async_insert: 1
     admin/async_insert_deduplicate: 1
+    admin/distributed_product_mode: global
     default/os_thread_priority: 4
     default/log_queries: 1
     default/async_insert: 1
@@ -68,14 +69,13 @@
     dbt/async_insert: 1
     dbt/wait_for_async_insert: 1
     dbt/async_insert_deduplicate: 1
+    dbt/distributed_product_mode: global
 
 - op: add
   path: /spec/configuration/settings
   value:
     max_connections: 10240
     distributed_ddl/path: /etc/clickhouse-server/new_task_queue/ddl
-    profile/admin/distributed_product_mode: global
-    profile/dbt/distributed_product_mode: global
 
 - op: replace
   path: /spec/configuration/clusters/0/templates/dataVolumeClaimTemplate
