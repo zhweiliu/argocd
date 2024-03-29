@@ -78,12 +78,18 @@
         volumeName: chi-standard-shard-0-replica-0
         accessModes:
           - ReadWriteOnce
+        resources:
+          requests:
+            storage: 5Gi
     - name: chi-standard-shard-1-replica-0
       spec:
         storageClassName: chi-data
         volumeName: chi-standard-shard-1-replica-0
         accessModes:
           - ReadWriteOnce
+        resources:
+          requests:
+            storage: 5Gi
 
 - op: replace
   path: /spec/configuration/clusters/0/layout
