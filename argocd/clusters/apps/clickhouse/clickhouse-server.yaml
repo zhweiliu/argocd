@@ -105,15 +105,8 @@
 - op: replace
   path: /spec/configuration/clusters/0/layout
   value:
-    shards:
-      - name: shard-0
-        replicasCount: 1
-        templates:
-          dataVolumeClaimTemplate: chi-standard-0-0
-      - name: shard-1
-        replicasCount: 1
-        templates:
-          dataVolumeClaimTemplate: chi-standard-1-0
+    shardsCount: 2
+    replicasCount: 1
 
 - op: replace
   path: /spec/templates/podTemplates/0/spec/containers/0/resources
