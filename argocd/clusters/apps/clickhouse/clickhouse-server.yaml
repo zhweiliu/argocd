@@ -93,7 +93,6 @@
           requests:
             storage: 5Gi
         reclaimPolicy: Retain
-        volumeName: pvc-42e3880a-e88c-45a5-a2e3-b06ca35c66d3
         
 - op: replace
   path: /spec/configuration/clusters/0/layout
