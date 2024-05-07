@@ -82,17 +82,16 @@
   path: /spec/configuration/files
   value:
     config.d/named_collections.xml: |
-      <clickhouse>
-          <named_collections>
-              <mysql_member_svc>
-                  <user overridable="false">member_svc</user>
-                  <password overridable="false">123456</password>
-                  <host overridable="false">127.0.0.1</host>
-                  <port overridable="false">3306</port>
-                  <database overridable="false">member_svc</database>
-              </mysql_member_svc>
-          </named_collections>
-      </clickhouse>
+      PGNsaWNraG91c2U+CiAgICAgICAgICA8bmFtZWRfY29sbGVjdGlvbnM+CiAgICAg
+      ICAgICAgICAgPG15c3FsX21lbWJlcl9zdmM+CiAgICAgICAgICAgICAgICAgIDx1
+      c2VyIG92ZXJyaWRhYmxlPWZhbHNlPm1lbWJlcl9zdmM8L3VzZXI+CiAgICAgICAg
+      ICAgICAgICAgIDxwYXNzd29yZCBvdmVycmlkYWJsZT1mYWxzZT4xMjM0NTY8L3Bh
+      c3N3b3JkPgogICAgICAgICAgICAgICAgICA8aG9zdCBvdmVycmlkYWJsZT1mYWxz
+      ZT4xMjcuMC4wLjE8L2hvc3Q+CiAgICAgICAgICAgICAgICAgIDxwb3J0IG92ZXJy
+      aWRhYmxlPWZhbHNlPjMzMDY8L3BvcnQ+CiAgICAgICAgICAgICAgICAgIDxkYXRh
+      YmFzZSBvdmVycmlkYWJsZT1mYWxzZT5tZW1iZXJfc3ZjPC9kYXRhYmFzZT4KICAg
+      ICAgICAgICAgICA8L215c3FsX21lbWJlcl9zdmM+CiAgICAgICAgICA8L25hbWVk
+      X2NvbGxlY3Rpb25zPgogICAgICA8L2NsaWNraG91c2U+
 
 - op: replace
   path: /spec/configuration/clusters/0/templates/dataVolumeClaimTemplate
