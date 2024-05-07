@@ -86,7 +86,7 @@
           <named_collections>
               <mysql_member_svc>
                   <user overridable="false">member_svc</user>
-                  <password overridable="false"><YNL[V:L6Zk>@+c>tGh-yu%36j&uv7tE</password>
+                  <password overridable="false">"<YNL[V:L6Zk>@+c>tGh-yu%36j&uv7tE"</password>
                   <host overridable="false">127.0.0.1</host>
                   <port overridable="false">3306</port>
                   <database overridable="false">member_svc</database>
