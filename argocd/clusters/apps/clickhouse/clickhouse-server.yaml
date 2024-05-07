@@ -16,6 +16,7 @@
     admin/profile: admin
     admin/quota: default
     admin/access_management: 1
+    admin/named_collection_control: 1
     admin/networks/ip:
      - ::1
      - 127.0.0.1/32
@@ -84,11 +85,11 @@
       <clickhouse>
           <named_collections>
               <mysql_member_svc>
-                  <user>member_svc</user>
-                  <password>123456</password>
-                  <host>127.0.0.1</host>
-                  <port>3306</port>
-                  <database>member_svc</database>
+                  <user overridable="false">member_svc</user>
+                  <password overridable="false">123456</password>
+                  <host overridable="false">127.0.0.1</host>
+                  <port overridable="false">3306</port>
+                  <database overridable="false">member_svc</database>
               </mysql_member_svc>
           </named_collections>
       </clickhouse>
