@@ -1,0 +1,9 @@
+apiVersion: v3
+name: postgresql
+version: 1.0.0
+appVersion: 1.0.0
+values: values.yaml
+dependencies:
+  - name: postgresql
+    version: 15.5.12
+    repository: https://charts.bitnami.com/bitnami
