@@ -2,13 +2,6 @@
   path: /spec/taskID
   value: standard-cluster
 
-# - op: add
-#   path: /spec/configuration/clusters/0/zookeeper
-#   value:
-#     nodes:
-#       - host: chk.clickhouse-keeper.svc.cluster.local
-#         port: 2181
-
 - op: add
   path: /spec/configuration/users
   value:
