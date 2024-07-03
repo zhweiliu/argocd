@@ -29,9 +29,9 @@ postgresql:
     ##
     auth:
       postgresPassword: ""
-      username: "labelstudio"
-      password: ""
-      database: labelstudio
+      username: "admin"
+      password: "localadmin"
+      database: "labelstudio"
       existingSecret: ""
       secretKeys:
         adminPasswordKey: ""
