@@ -29,8 +29,8 @@ postgresql:
     ##
     auth:
       postgresPassword: ""
-      username: "admin"
-      password: "localadmin"
+      username: "labelstudio"
+      password: "labelstudio"
       database: "labelstudio"
       existingSecret: ""
       secretKeys:
@@ -133,7 +133,7 @@ auth:
   username: "labelstudio"
   ## @param auth.password Password for the custom user to create. Ignored if `auth.existingSecret` is provided
   ##
-  password: ""
+  password: "labelstudio"
   ## @param auth.database Name for a custom database to create
   ##
   database: labelstudio
