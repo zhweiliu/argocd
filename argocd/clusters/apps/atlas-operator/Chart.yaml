@@ -6,4 +6,4 @@ values: values.yaml
 dependencies:
   - name: atlas-operator
     version: 0.5.0
-    repository: http://ghcr.io/ariga/charts/atlas-operator
+    repository: https://ghcr.io/ariga/charts/atlas-operator
