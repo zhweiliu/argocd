@@ -1,0 +1,91 @@
+atlas-operator:
+  replicaCount: 1
+
+  image:
+    repository: arigaio/atlas-operator
+    pullPolicy: ""
+    tag: ""
+
+  rbac:
+    create: true
+
+  imagePullSecrets: []
+  nameOverride: ""
+  fullnameOverride: ""
+
+  serviceAccount:
+    create: true
+    annotations: {}
+    labels: {}
+    name: ""
+
+  podAnnotations: {}
+
+  podLabels: {}
+
+  podSecurityContext:
+    runAsNonRoot: true
+
+  containerSecurityContext:
+    runAsUser: 1000
+    allowPrivilegeEscalation: false
+    capabilities:
+      drop:
+        - ALL
+
+  resources: {}
+
+  nodeSelector: {}
+
+  tolerations: []
+
+  affinity: 
+    podAntiAffinity:
+      preferredDuringSchedulingIgnoredDuringExecution:
+      - weight: 1
+        podAffinityTerm:
+          labelSelector:
+            matchExpressions:
+            - key: app
+              operator: In
+              values:
+              - atlas-operator
+          topologyKey: "kubernetes.io/hostname"
+    nodeAffinity:
+      requiredDuringSchedulingIgnoredDuringExecution:
+        nodeSelectorTerms:
+          - matchExpressions:
+              - key: cloud.google.com/gke-nodepool
+                operator: In
+                values:
+                  - atlas-operator
+
+  # By default, the operator will recreate devdb pods after migration
+  # Set this to true to keep the devdb pods around.
+  prewarmDevDB: true
+
+  # -- Additional environment variables to set
+  extraEnvs: []
+  # extraEnvs:
+  #   - name: FOO
+  #     valueFrom:
+  #       secretKeyRef:
+  #         key: FOO
+  #         name: secret-resource
+  #   - name: BAR
+  #     valueFrom:
+  #      configMapKeyRef:
+  #        key: BAR
+  #        name: config-map-resource
+
+  extraVolumes: []
+  # extraVolumes:
+  #   - name: extra-volume
+  #     secret:
+  #       secretName: extra-volume-secret
+
+  extraVolumeMounts: []
+  # extraVolumeMounts:
+  #   - name: extra-volume
+  #     mountPath: /extra-volume
+  #     readOnly: true
