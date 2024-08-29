@@ -3,6 +3,7 @@ kind: Kustomization
 
 resources:
   - ../../../../../components/schemas/clickhouse/overlays/standard
+  - secrets.yaml
 
 patches:
   - target:
