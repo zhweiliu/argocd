@@ -6,9 +6,9 @@
       key: CLICKHOUSE_URL
 
 - op: replace
-  path: /spec/schemas
+  path: /spec/schema
   value:
-    - |
+    sql: |
       CREATE TABLE `users` (
           `id` UInt64,
           `name` String)

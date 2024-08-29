@@ -2,11 +2,11 @@ apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
 
 resources:
-  - ../../../../../components/schemas/clickhouse/overlays/standard
+  - ../../../../../components/schemas/clickhouse/overlays/standard/users
   - secrets.yaml
 
 patches:
   - target:
       kind: AtlasSchema
-      name: ingestion
-    path: patch-ingestion.yaml
+      name: users
+    path: patch-users.yaml

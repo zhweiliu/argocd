@@ -15,4 +15,4 @@ patches:
   patch: |- 
     - op: replace
       path: /metadata/name
-      value: ingestion
+      value: users

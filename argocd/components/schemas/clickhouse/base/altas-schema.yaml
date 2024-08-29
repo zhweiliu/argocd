@@ -5,4 +5,4 @@ metadata:
     argocd.argoproj.io/sync-wave: "1"
   name: COMPONENT_NAME
 spec:
-  schemas: []
+  schema: {}
