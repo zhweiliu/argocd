@@ -9,10 +9,9 @@
   path: /spec/schemas
   value:
     - |
-      create table users (
-        id int not null auto_increment,
-        name varchar(255) not null,
-        email varchar(255) unique not null,
-        short_bio varchar(255) not null,
-        primary key (id)
-      );
+      CREATE TABLE `users` (
+          `id` UInt64,
+          `name` String)
+      ENGINE = MergeTree
+      PRIMARY KEY (`id`)
+      SETTINGS index_granularity = 8192;
