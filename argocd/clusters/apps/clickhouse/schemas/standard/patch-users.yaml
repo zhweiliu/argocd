@@ -1,14 +1,17 @@
 - op: add
   path: /spec/credentials
   value: 
+    scheme: clickhouse
     database: ingestion
-    host: clickhouse://service-standard.clickhouse.svc.cluster.local
+    host: service-standard.clickhouse.svc.cluster.local
     port: 9000
     user: admin
     passwordFrom:
       secretKeyRef:
         name: chi-users
         key: ADMIN
+    parameters:
+      sslmode: disable
 
 - op: replace
   path: /spec/schema
