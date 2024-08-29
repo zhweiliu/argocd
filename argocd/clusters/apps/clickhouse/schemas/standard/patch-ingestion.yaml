@@ -5,7 +5,7 @@
       name: standard-cluster
       key: CLICKHOUSE_URL
 
-- op: add
+- op: replace
   path: /spec/schemas
   value:
     - |
