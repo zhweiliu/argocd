@@ -2,7 +2,7 @@
   path: /spec/credentials
   value: 
     database: ingestion
-    host: service-standard.clickhouse.svc.cluster.local
+    host: clickhouse://service-standard.clickhouse.svc.cluster.local
     port: 9000
     user: admin
     passwordFrom:
