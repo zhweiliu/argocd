@@ -1,9 +1,14 @@
 - op: add
-  path: /spec/urlFrom
+  path: /spec/credentials
   value: 
-    secretKeyRef:
-      name: standard-cluster
-      key: CLICKHOUSE_URL
+    database: ingestion
+    host: service-standard.clickhouse.svc.cluster.local
+    port: 9000
+    user: admin
+    passwordFrom:
+      secretKeyRef:
+        name: chi-users
+        key: ADMIN
 
 - op: replace
   path: /spec/schema
