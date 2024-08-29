@@ -1,9 +1,0 @@
-apiVersion: v3
-name: atlas-operator
-version: 1.0.0
-appVersion: 1.0.0
-values: values.yaml
-dependencies:
-  - name: atlas-operator
-    version: 0.5.0
-    repository: oci://ghcr.io/ariga/charts
