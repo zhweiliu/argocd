@@ -1,0 +1,6 @@
+- op: add
+  path: /spec/urlFrom
+  value: 
+    secretKeyRef:
+      name: standard-cluster
+      key: CLICKHOUSE_URL
