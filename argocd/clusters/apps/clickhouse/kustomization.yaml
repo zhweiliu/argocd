@@ -5,6 +5,7 @@ resources:
   - secrets.yaml
   - ../../../components/clickhouse/overlays/common
   - storage-class.yaml
+  - ./schemas/standard
 
 images:
   - name: image-name
